@@ -1,5 +1,6 @@
 import {
   Box,
+  Button,
   Container,
   Flex,
   Heading,
@@ -30,8 +31,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function Home() {
   const page = await getHomePage();
-
-  console.log(page);
 
   return (
     <>
@@ -143,27 +142,38 @@ export default async function Home() {
             columns={{ base: 1, lg: 2 }}
             gap={{ base: "8", lg: "20" }}
           >
-            <Eyebrow>{page.introductionEyebrow}</Eyebrow>
-            <AnimatedReveal>
-              <Stack gap="6">
-                <Heading
-                  fontFamily="heading"
-                  fontSize={{ base: "4xl", md: "6xl" }}
-                  fontWeight="400"
-                  letterSpacing="-0.045em"
-                  lineHeight="0.98"
-                >
-                  {page.introductionTitle}
-                </Heading>
-                <Text
-                  color="ink.700"
-                  fontSize={{ base: "lg", md: "xl" }}
-                  lineHeight="1.85"
-                >
-                  {page.introductionText}
-                </Text>
-              </Stack>
-            </AnimatedReveal>
+            <Stack gap="4">
+              <Eyebrow>{page.introductionEyebrow}</Eyebrow>
+              <AnimatedReveal>
+                <Stack gap="6">
+                  <Heading
+                    fontFamily="heading"
+                    fontSize={{ base: "4xl", md: "6xl" }}
+                    fontWeight="400"
+                    letterSpacing="-0.045em"
+                    lineHeight="0.98"
+                  >
+                    {page.introductionTitle}
+                  </Heading>
+                </Stack>
+              </AnimatedReveal>
+            </Stack>
+            <Stack gap="4">
+              <Text
+                color="ink.700"
+                fontSize={{ base: "lg", md: "xl" }}
+                lineHeight="1.85"
+              >
+                {page.introductionText}
+              </Text>
+              <CtaButton
+                cta={{
+                  href: "/about",
+                  label: "Sobre nós",
+                }}
+                tone="outline"
+              />
+            </Stack>
           </SimpleGrid>
         </Container>
       </Box>
@@ -196,7 +206,7 @@ export default async function Home() {
 
       <Box
         as="section"
-        bg="ink.900"
+        bg="ink.950"
         color="ivory.50"
         py={{ base: "20", md: "28" }}
       >

@@ -447,8 +447,9 @@ export type AllSanitySchemaTypes = Settings | Seo | CallToAction | ServicesPage 
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: SETTINGS_QUERY
-// Query: *[_id == "settings"][0]{    siteName,    tagline,    monogram,    primaryCta{label, href},    navigation[]{_key, label, href},    phone,    email,    address,    mapUrl,    officeHours,    socialLinks[]{_key, label, href},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
+// Query: *[_id == "settings"][0]{    siteLogo,    siteName,    tagline,    monogram,    primaryCta{label, href},    navigation[]{_key, label, href},    phone,    email,    address,    mapUrl,    officeHours,    socialLinks[]{_key, label, href},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
 export type SETTINGS_QUERY_RESULT = {
+  siteLogo: null;
   siteName: null;
   tagline: null;
   monogram: null;
@@ -462,6 +463,7 @@ export type SETTINGS_QUERY_RESULT = {
   socialLinks: null;
   seo: null;
 } | {
+  siteLogo: null;
   siteName: null;
   tagline: null;
   monogram: null;
@@ -494,6 +496,7 @@ export type SETTINGS_QUERY_RESULT = {
     } | null;
   } | null;
 } | {
+  siteLogo: null;
   siteName: string;
   tagline: string;
   monogram: string | null;
@@ -540,9 +543,10 @@ export type SETTINGS_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "homePage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    introductionEyebrow,    introductionTitle,    introductionText,    servicesEyebrow,    servicesTitle,    servicesDescription,    servicesCta{label, href},    featuredServices[]->{_id, title, "slug": slug.current, eyebrow, summary, heroImage{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, orderRank},    timelineEyebrow,    timelineTitle,    timelineDescription,    timeline[]{_key, title, description},    valuesTitle,    values[]{_key, title, description},    faqTitle,    faqDescription,    faqCta{label, href},    faqs[]{_key, question, answer},    articlesTitle,    articlesDescription,    articlesCta{label, href},    "latestPosts": *[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...3]{_id, title, "slug": slug.current, excerpt, publishedAt, mainImage{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
+// Query: *[_id == "homePage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    decorativeSignature,    introductionEyebrow,    introductionTitle,    introductionText,    servicesEyebrow,    servicesTitle,    servicesDescription,    servicesCta{label, href},    featuredServices[]->{_id, title, "slug": slug.current, eyebrow, summary, heroImage{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, orderRank},    timelineEyebrow,    timelineTitle,    timelineDescription,    timeline[]{_key, title, description},    valuesTitle,    values[]{_key, title, description},    faqTitle,    faqDescription,    faqCta{label, href},    faqs[]{_key, question, answer},    articlesTitle,    articlesDescription,    articlesCta{label, href},    "latestPosts": *[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...3]{_id, title, "slug": slug.current, excerpt, publishedAt, mainImage{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
 export type HOME_PAGE_QUERY_RESULT = {
   hero: null;
+  decorativeSignature: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
@@ -591,6 +595,7 @@ export type HOME_PAGE_QUERY_RESULT = {
   seo: null;
 } | {
   hero: null;
+  decorativeSignature: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
@@ -682,6 +687,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       } | null;
     } | null;
   };
+  decorativeSignature: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
@@ -749,6 +755,7 @@ export type HOME_PAGE_QUERY_RESULT = {
   } | null;
 } | {
   hero: null;
+  decorativeSignature: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
@@ -844,6 +851,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       } | null;
     } | null;
   };
+  decorativeSignature: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
@@ -959,6 +967,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       } | null;
     } | null;
   };
+  decorativeSignature: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
@@ -1078,6 +1087,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       } | null;
     } | null;
   };
+  decorativeSignature: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
@@ -1197,6 +1207,7 @@ export type HOME_PAGE_QUERY_RESULT = {
       } | null;
     } | null;
   };
+  decorativeSignature: null;
   introductionEyebrow: string | null;
   introductionTitle: string;
   introductionText: string;
@@ -2800,8 +2811,8 @@ export type POST_DETAIL_QUERY_RESULT = {
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "\n  *[_id == \"settings\"][0]{\n    siteName,\n    tagline,\n    monogram,\n    primaryCta{label, href},\n    navigation[]{_key, label, href},\n    phone,\n    email,\n    address,\n    mapUrl,\n    officeHours,\n    socialLinks[]{_key, label, href},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": SETTINGS_QUERY_RESULT;
-    "\n  *[_id == \"homePage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    introductionEyebrow,\n    introductionTitle,\n    introductionText,\n    servicesEyebrow,\n    servicesTitle,\n    servicesDescription,\n    servicesCta{label, href},\n    featuredServices[]->{_id, title, \"slug\": slug.current, eyebrow, summary, heroImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, orderRank},\n    timelineEyebrow,\n    timelineTitle,\n    timelineDescription,\n    timeline[]{_key, title, description},\n    valuesTitle,\n    values[]{_key, title, description},\n    faqTitle,\n    faqDescription,\n    faqCta{label, href},\n    faqs[]{_key, question, answer},\n    articlesTitle,\n    articlesDescription,\n    articlesCta{label, href},\n    \"latestPosts\": *[_type == \"post\" && defined(slug.current)] | order(publishedAt desc)[0...3]{_id, title, \"slug\": slug.current, excerpt, publishedAt, mainImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": HOME_PAGE_QUERY_RESULT;
+    "\n  *[_id == \"settings\"][0]{\n    siteLogo,\n    siteName,\n    tagline,\n    monogram,\n    primaryCta{label, href},\n    navigation[]{_key, label, href},\n    phone,\n    email,\n    address,\n    mapUrl,\n    officeHours,\n    socialLinks[]{_key, label, href},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": SETTINGS_QUERY_RESULT;
+    "\n  *[_id == \"homePage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    decorativeSignature,\n    introductionEyebrow,\n    introductionTitle,\n    introductionText,\n    servicesEyebrow,\n    servicesTitle,\n    servicesDescription,\n    servicesCta{label, href},\n    featuredServices[]->{_id, title, \"slug\": slug.current, eyebrow, summary, heroImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, orderRank},\n    timelineEyebrow,\n    timelineTitle,\n    timelineDescription,\n    timeline[]{_key, title, description},\n    valuesTitle,\n    values[]{_key, title, description},\n    faqTitle,\n    faqDescription,\n    faqCta{label, href},\n    faqs[]{_key, question, answer},\n    articlesTitle,\n    articlesDescription,\n    articlesCta{label, href},\n    \"latestPosts\": *[_type == \"post\" && defined(slug.current)] | order(publishedAt desc)[0...3]{_id, title, \"slug\": slug.current, excerpt, publishedAt, mainImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": HOME_PAGE_QUERY_RESULT;
     "\n  *[_id == \"aboutPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    storyEyebrow,\n    storyTitle,\n    story,\n    portrait{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n},\n    valuesTitle,\n    values[]{_key, title, description},\n    stats[]{_key, value, label},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": ABOUT_PAGE_QUERY_RESULT;
     "\n  *[_id == \"servicesPage\"][0]{hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}}\n": SERVICES_PAGE_QUERY_RESULT;
     "\n  *[_id == \"blogPage\"][0]{hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}}\n": BLOG_PAGE_QUERY_RESULT;
