@@ -202,6 +202,10 @@ export type ContactPage = {
     submitLabel: string;
   };
   contactNote?: string;
+  facebookLink?: string;
+  instagramLink?: string;
+  linkedInLink?: string;
+  whatsappLink?: string;
   seo?: Seo;
 };
 import type { PortableTextBlock } from "next-sanity";

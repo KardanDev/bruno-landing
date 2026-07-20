@@ -114,6 +114,10 @@ export const CONTACT_PAGE_QUERY = defineQuery(`
     hero{${HERO_FIELDS}},
     form{heading, description, nameLabel, emailLabel, subjectLabel, messageLabel, submitLabel},
     contactNote,
+    facebookLink,
+    instagramLink,
+    linkedInLink,
+    whatsappLink,
     ${SEO_FIELDS}
   }
 `);
