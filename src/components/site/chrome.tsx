@@ -27,38 +27,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 export function SiteHeader({ settings }: { settings: Settings }) {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [scrolledDown, setScrolledDown] = useState(false);
   const pathname = usePathname();
-  const headerRef = useRef<HTMLDivElement>(null);
-
-  // useGSAP(() => {
-  //   if (!headerRef.current) return;
-
-  //   ScrollTrigger.create({
-  //     trigger: document.body,
-  //     start: "top -100px",
-  //     onEnter: () => {
-  //       setScrolledDown(true);
-  //       gsap.to(headerRef.current, {
-  //         backgroundColor: "#161312",
-  //         backdropFilter: "blur(16px)",
-  //         boxShadow: "0 4px 16px rgba(0,0,0,0.08)",
-
-  //         duration: 0.25,
-  //       });
-  //     },
-  //     onLeaveBack: () => {
-  //       setScrolledDown(false);
-  //       gsap.to(headerRef.current, {
-  //         backgroundColor: "#161312",
-  //         borderColor: "#161312",
-  //         backdropFilter: "blur(0px)",
-  //         boxShadow: "none",
-  //         duration: 0.25,
-  //       });
-  //     },
-  //   });
-  // }, []);
 
   return (
     <Box
@@ -68,7 +37,7 @@ export function SiteHeader({ settings }: { settings: Settings }) {
       zIndex="1000"
       bg="#161312"
       borderBottomWidth="1px"
-      borderColor="#161312"
+      borderColor="ink.900"
       w={"full"}
       transition="background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease, box-shadow .25s ease"
     >

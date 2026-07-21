@@ -1,20 +1,6 @@
 import { createSystem, defaultConfig, defineConfig } from "@chakra-ui/react";
 
 const config = defineConfig({
-  globalCss: {
-    "html, body": {
-      minHeight: "100%",
-      bg: "canvas",
-      color: "ink.900",
-    },
-    body: {
-      fontFamily: "body",
-    },
-    "::selection": {
-      bg: "wine.700",
-      color: "ivory.50",
-    },
-  },
   theme: {
     tokens: {
       colors: {
@@ -42,20 +28,61 @@ const config = defineConfig({
           400: { value: "#C79D57" },
         },
       },
+
       fonts: {
         heading: { value: '"Montserrat", sans-serif' },
         body: { value: '"Montserrat", sans-serif' },
       },
+
       radii: {
         editorial: { value: "1.5rem" },
       },
     },
+
     semanticTokens: {
       colors: {
-        canvas: { value: "{colors.ivory.50}" },
-        surface: { value: "{colors.ivory.100}" },
-        border: { value: "{colors.ivory.300}" },
+        canvas: {
+          value: {
+            base: "{colors.ink.950}",
+            _dark: "{colors.ink.950}",
+          },
+        },
+        surface: {
+          value: {
+            base: "{colors.ink.900}",
+            _dark: "{colors.ink.900}",
+          },
+        },
+        border: {
+          value: {
+            base: "{colors.ink.700}",
+            _dark: "{colors.ink.700}",
+          },
+        },
+        text: {
+          value: {
+            base: "{colors.ivory.50}",
+            _dark: "{colors.ivory.50}",
+          },
+        },
       },
+    },
+  },
+
+  globalCss: {
+    "html, body": {
+      minHeight: "100%",
+      bg: "canvas",
+      color: "text",
+    },
+
+    body: {
+      fontFamily: "body",
+    },
+
+    "::selection": {
+      bg: "wine.600",
+      color: "ivory.50",
     },
   },
 });
