@@ -6,9 +6,12 @@ import {
   Container,
   Flex,
   HStack,
+  Icon,
+  Input,
   Link,
   Stack,
   Text,
+  VStack,
 } from "@chakra-ui/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -21,6 +24,9 @@ import type { Settings } from "@/sanity/lib/types";
 import { navigationLinks } from "@/utils/constants";
 import { CtaButton } from "./cta-button";
 import { CmsImage } from "./cms-image";
+import { FaLocationPin, FaMapLocation } from "react-icons/fa6";
+import { BiPhone } from "react-icons/bi";
+import { GrMail } from "react-icons/gr";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -177,20 +183,55 @@ export function SiteFooter({ settings }: { settings: Settings }) {
             gap="8"
             justify="space-between"
           >
-            <Stack gap="4" maxW="lg">
-              <Text
-                fontFamily="heading"
-                fontSize={{ base: "4xl", md: "5xl" }}
-                fontWeight="400"
-                lineHeight="0.95"
-              >
-                {settings.siteName}
-              </Text>
+            <Stack
+              gap="4"
+              maxW="lg"
+              alignItems={{
+                base: "center",
+                md: "start",
+              }}
+            >
+              {settings?.siteLogo ? (
+                <CmsImage image={settings.siteLogo} width={400} height={400} />
+              ) : (
+                <Text
+                  fontFamily="heading"
+                  fontSize={{ base: "4xl", md: "5xl" }}
+                  fontWeight="400"
+                  lineHeight="0.95"
+                >
+                  {settings.siteName}
+                </Text>
+              )}
 
               <Text color="ivory.200" fontSize="lg" lineHeight="1.7">
                 {settings.tagline}
               </Text>
             </Stack>
+            <VStack
+              w={{
+                base: "full",
+                md: "1/3",
+              }}
+              alignItems="start"
+            >
+              <Text as="h1" fontSize={"xl"}>
+                Sign up to our newsletter!
+              </Text>
+              <form style={{ width: "100%" }}>
+                <Input
+                  w="full"
+                  type="email"
+                  bg="ink.700"
+                  borderColor={"border"}
+                  color="ivory.300"
+                  placeholder="Your email address"
+                  _placeholder={{
+                    color: "ivory.300",
+                  }}
+                />
+              </form>
+            </VStack>
           </Flex>
 
           <Flex
@@ -203,10 +244,22 @@ export function SiteFooter({ settings }: { settings: Settings }) {
           >
             <Stack color="ivory.200" fontSize="sm" gap="2">
               {settings.address && (
-                <Text whiteSpace="pre-line">{settings.address}</Text>
+                <Text whiteSpace="pre-line" maxW="lg">
+                  {settings.address}
+                </Text>
               )}
-              {settings.phone && <Text>{settings.phone}</Text>}
-              {settings.email && <Text>{settings.email}</Text>}
+              {settings.phone && (
+                <HStack>
+                  <BiPhone />
+                  <Text>{settings.phone}</Text>
+                </HStack>
+              )}
+              {settings.email && (
+                <HStack>
+                  <GrMail />
+                  <Text>{settings.email}</Text>
+                </HStack>
+              )}
               {settings.officeHours && <Text>{settings.officeHours}</Text>}
             </Stack>
 

@@ -92,17 +92,21 @@ export default async function ContactPage() {
               {settings.address ? (
                 settings.mapUrl ? (
                   <Link
-                    color="ink.700"
+                    color="ivory.300"
                     href={settings.mapUrl}
                     lineHeight="1.75"
                     target="_blank"
                     whiteSpace="pre-line"
-                    _hover={{ color: "wine.700" }}
+                    _hover={{ color: "gold.400" }}
                   >
                     {settings.address}
                   </Link>
                 ) : (
-                  <Text color="ink.700" lineHeight="1.75" whiteSpace="pre-line">
+                  <Text
+                    color="ivory.300"
+                    lineHeight="1.75"
+                    whiteSpace="pre-line"
+                  >
                     {settings.address}
                   </Text>
                 )
