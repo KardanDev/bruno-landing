@@ -104,13 +104,27 @@ export function SiteHeader({ settings }: { settings: Settings }) {
           <Button
             aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
             bg="transparent"
-            color="ink.900"
+            color="ivory.100"
             display={{ base: "inline-flex", lg: "none" }}
             onClick={() => setMenuOpen((v) => !v)}
             px="2"
             _hover={{ bg: "transparent", color: "gold.300" }}
           >
-            {menuOpen ? <LuX /> : <LuMenu />}
+            {menuOpen ? (
+              <LuX
+                style={{
+                  height: "24px",
+                  width: "24px",
+                }}
+              />
+            ) : (
+              <LuMenu
+                style={{
+                  height: "24px",
+                  width: "24px",
+                }}
+              />
+            )}
           </Button>
         </Flex>
 
@@ -127,7 +141,7 @@ export function SiteHeader({ settings }: { settings: Settings }) {
               <Link
                 key={item._key}
                 asChild
-                color={pathname === item.href ? "gold.300" : "ink.900"}
+                color={pathname === item.href ? "gold.300" : "ivory.50"}
                 fontFamily="heading"
                 fontSize="xl"
                 py="2"

@@ -33,7 +33,7 @@ const HeroContent = ({ page }: Props) => {
         <ParallaxImage
           alt={page.hero.image?.alt}
           fallbackLabel="MD"
-          mode="contain"
+          mode="cover"
           image={page.hero.image}
           useTransformProps={false}
         />

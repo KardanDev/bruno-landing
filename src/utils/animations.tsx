@@ -83,9 +83,8 @@ export function ParallaxImage({
         <CmsImage
           alt={alt}
           fallbackLabel={fallbackLabel}
-          mode={mode}
           image={image}
-          style={{ width: "100%", height: "100%", ...style }}
+          style={{ width: "100%", height: "100%", objectFit: mode, ...style }}
         />
       </div>
     );
