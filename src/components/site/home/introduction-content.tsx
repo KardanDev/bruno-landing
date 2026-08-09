@@ -51,7 +51,6 @@ const IntroductionContent = ({ page }: Props) => {
           <CmsImage
             image={page.introductionBanner}
             alt={page.introductionBanner.alt || ""}
-            mode="cover"
             style={{
               width: "100%",
               height: "100%",

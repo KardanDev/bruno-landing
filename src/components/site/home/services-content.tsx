@@ -20,7 +20,7 @@ const ServicesContent = ({ page }: Props) => {
       overflow="hidden"
       bg="ink.950"
       color="ivory.50"
-      py={{ base: "20", md: "28" }}
+      py={{ base: "20", md: "20" }}
     >
       {/* Background image */}
       {page.servicesBanner && (
@@ -59,8 +59,8 @@ const ServicesContent = ({ page }: Props) => {
           inset={0}
           zIndex={1}
           bgGradient={{
-            base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 45%, blackAlpha.300 100%)",
-            lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 40%, blackAlpha.200 75%, transparent 100%)",
+            base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 30%, blackAlpha.300 70%)",
+            lg: "linear(to-b, blackAlpha.800 0%, blackAlpha.600 25%, blackAlpha.200 50%, transparent 50%)",
           }}
         />
       )}
@@ -70,7 +70,6 @@ const ServicesContent = ({ page }: Props) => {
         zIndex={2}
         maxW="8xl"
         px={{ base: "5", md: "8" }}
-        py={{ md: "8" }}
       >
         <Flex
           align={{ base: "flex-start", md: "flex-end" }}
