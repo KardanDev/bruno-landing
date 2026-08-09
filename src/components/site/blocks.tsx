@@ -634,7 +634,7 @@ export function ClosingCta({ hero }: { hero?: PageHero }) {
   return (
     <Box
       as="section"
-      bg="ivory.200"
+      bg="ivory.300"
       color="ink.900"
       py={{ base: "16", md: "24" }}
     >
