@@ -17,7 +17,7 @@ export default async function FaqPage() {
     <>
       <PageHero hero={page.hero} />
       <Box as="section" py={{ base: "20", md: "28" }}>
-        <Container maxW="6xl" px={{ base: "5", md: "8" }}>
+        <Container maxW="8xl" px={{ base: "5", md: "8" }}>
           <FaqList items={page.faqs} inverse />
         </Container>
       </Box>

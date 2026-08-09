@@ -31,7 +31,7 @@ export default async function AboutPage() {
           >
             <Stack gap="5">
               <Eyebrow>{page.storyEyebrow}</Eyebrow>
-              <SectionHeading title={page.storyTitle} />
+              <SectionHeading title={page.storyTitle} inverse />
               <Box
                 display={{ base: "none", lg: "block" }}
                 borderRadius="editorial"
@@ -64,9 +64,9 @@ export default async function AboutPage() {
           </SimpleGrid>
         </Container>
       </Box>
-      <Box as="section" bg="surface" py={{ base: "20", md: "28" }}>
+      <Box as="section" bg="ink.950" py={{ base: "20", md: "0" }}>
         <Container maxW="8xl" px={{ base: "5", md: "8" }}>
-          <SectionHeading title={page.valuesTitle} />
+          <SectionHeading title={page.valuesTitle} inverse />
           <SimpleGrid
             columns={{ base: 1, md: 3 }}
             gap={{ base: "8", md: "6" }}
@@ -80,7 +80,7 @@ export default async function AboutPage() {
                 key={value._key}
                 pt="5"
               >
-                <Text color="ink.900" fontFamily="heading" fontSize="3xl">
+                <Text color="ivory.100" fontFamily="heading" fontSize="3xl">
                   {value.title}
                 </Text>
                 <Text color="ink.700" lineHeight="1.75">

@@ -242,12 +242,10 @@ export function PageHero({ hero }: { hero: PageHero }) {
               ) : null}
 
               {hero.cta ? (
-                <MotionWrapper y={18} scale={0.94}>
+                <MotionWrapper scale={0.94}>
                   <Box pt="2">
                     <motion.div
-                      whileHover={
-                        reduceMotion ? undefined : { scale: 1.08, y: -2 }
-                      }
+                      whileHover={reduceMotion ? undefined : { scale: 1.08 }}
                       whileTap={reduceMotion ? undefined : { scale: 0.96 }}
                       transition={{
                         type: "spring",
@@ -255,7 +253,7 @@ export function PageHero({ hero }: { hero: PageHero }) {
                         damping: 16,
                       }}
                     >
-                      <CtaButton cta={hero.cta} tone="light" />
+                      <CtaButton cta={hero.cta} tone="dark" />
                     </motion.div>
                   </Box>
                 </MotionWrapper>
@@ -662,14 +660,14 @@ export function FeatureList({ items }: { items?: string[] }) {
               <Box
                 bg="gold.300"
                 borderRadius="full"
-                color="wine.900"
+                color="ink.900"
                 mt="1"
                 p="1"
               >
                 <LuCheck size={14} />
               </Box>
             </motion.div>
-            <Text color="ink.700" fontSize="lg">
+            <Text color="ivory.200" fontSize="lg">
               {item}
             </Text>
           </HStack>

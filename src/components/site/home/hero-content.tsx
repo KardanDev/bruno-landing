@@ -59,7 +59,14 @@ const HeroContent = ({ page }: Props) => {
         px={{ base: 6, md: 12, xl: 20 }}
         py={{ base: 24, lg: 44 }}
       >
-        <Stack gap="7" maxW="2xl" align="start">
+        <Stack
+          gap="7"
+          maxW={{
+            lg: "2xl",
+            xl: "3xl",
+          }}
+          align="start"
+        >
           {page.hero.eyebrow && (
             <Reveal delay={0.04} y={16} scale={0.98}>
               <Eyebrow color="gold.300">{page.hero.eyebrow}</Eyebrow>
@@ -72,11 +79,11 @@ const HeroContent = ({ page }: Props) => {
               fontFamily="heading"
               fontWeight="400"
               letterSpacing="-0.06em"
-              lineHeight="0.9"
+              lineHeight="1.078"
               fontSize={{
                 base: "5xl",
-                md: "6xl",
-                xl: "7xl",
+                md: "5xl",
+                xl: "6xl",
               }}
               textAlign="left"
             >

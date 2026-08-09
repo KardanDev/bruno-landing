@@ -81,7 +81,7 @@ const config = defineConfig({
     },
 
     "::selection": {
-      bg: "wine.600",
+      bg: "gold.300",
       color: "ivory.50",
     },
   },
