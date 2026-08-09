@@ -70,6 +70,7 @@ const ServicesContent = ({ page }: Props) => {
         zIndex={2}
         maxW="8xl"
         px={{ base: "5", md: "8" }}
+        py={{ md: "8" }}
       >
         <Flex
           align={{ base: "flex-start", md: "flex-end" }}
