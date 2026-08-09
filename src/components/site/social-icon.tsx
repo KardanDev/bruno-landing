@@ -17,6 +17,8 @@ const SocialIcon = ({ icon, href }: Props) => {
       rounded="full"
       asChild
       variant="surface"
+      bg="ink.700"
+      borderColor="gold.400"
       color="gold.400"
       _hover={{
         backgroundColor: "gold.400",

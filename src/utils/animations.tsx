@@ -1,3 +1,5 @@
+"use client";
+
 import { CmsImage } from "@/components/site/cms-image";
 import { Box } from "@chakra-ui/react";
 import {
@@ -172,5 +174,51 @@ export function FloatingOrbs() {
         />
       </motion.div>
     </>
+  );
+}
+
+export function MotionWrapper({
+  children,
+  delay = 0,
+  y = 40,
+  scale = 0.88,
+  rotate = 0,
+  once = true,
+  amount = 0.22,
+}: {
+  children: React.ReactNode;
+  delay?: number;
+  y?: number;
+  scale?: number;
+  rotate?: number;
+  once?: boolean;
+  amount?: number;
+}) {
+  const reduceMotion = useReducedMotion();
+
+  return (
+    <motion.div
+      initial={
+        reduceMotion
+          ? false
+          : { opacity: 0, y, scale, rotate, filter: "blur(12px)" }
+      }
+      whileInView={
+        reduceMotion
+          ? undefined
+          : { opacity: 1, y: 0, scale: 1, rotate: 0, filter: "blur(0px)" }
+      }
+      viewport={{ once, amount }}
+      transition={{
+        type: "spring",
+        stiffness: 90,
+        damping: 18,
+        mass: 0.9,
+        delay,
+      }}
+      style={{ willChange: "transform, opacity, filter" }}
+    >
+      {children}
+    </motion.div>
   );
 }

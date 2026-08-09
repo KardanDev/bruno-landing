@@ -39,11 +39,11 @@ export function ContactForm({
     <form onSubmit={submit}>
       <Stack gap="5">
         <Field.Root required>
-          <Field.Label color="ink.900" fontWeight="700">
+          <Field.Label color="ivory.100" fontWeight="700">
             {copy.nameLabel}
           </Field.Label>
           <Input
-            bg="ivory.50"
+            bg="ink.700"
             borderColor="border"
             borderRadius="md"
             name="name"
@@ -53,11 +53,11 @@ export function ContactForm({
           />
         </Field.Root>
         <Field.Root required>
-          <Field.Label color="ink.900" fontWeight="700">
+          <Field.Label color="ivory.100" fontWeight="700">
             {copy.emailLabel}
           </Field.Label>
           <Input
-            bg="ivory.50"
+            bg="ink.700"
             borderColor="border"
             borderRadius="md"
             name="email"
@@ -68,11 +68,11 @@ export function ContactForm({
           />
         </Field.Root>
         <Field.Root required>
-          <Field.Label color="ink.900" fontWeight="700">
+          <Field.Label color="ivory.100" fontWeight="700">
             {copy.subjectLabel}
           </Field.Label>
           <Input
-            bg="ivory.50"
+            bg="ink.700"
             borderColor="border"
             borderRadius="md"
             name="subject"
@@ -82,11 +82,11 @@ export function ContactForm({
           />
         </Field.Root>
         <Field.Root required>
-          <Field.Label color="ink.900" fontWeight="700">
+          <Field.Label color="ivory.100" fontWeight="700">
             {copy.messageLabel}
           </Field.Label>
           <Textarea
-            bg="ivory.50"
+            bg="ink.700"
             borderColor="border"
             borderRadius="md"
             minH="36"
@@ -100,7 +100,7 @@ export function ContactForm({
           alignSelf="flex-start"
           bg="gold.400"
           borderRadius="full"
-          color="ivory.50"
+          color="ivory.100"
           px="6"
           type="submit"
           _hover={{ bg: "gold.300" }}

@@ -191,8 +191,6 @@ export function SiteFooter({ settings }: { settings: Settings }) {
                 {settings.tagline}
               </Text>
             </Stack>
-
-            <CtaButton cta={settings.primaryCta} tone="light" />
           </Flex>
 
           <Flex

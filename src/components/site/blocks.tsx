@@ -26,6 +26,7 @@ import { AnimatedReveal } from "./animated-reveal";
 import { CmsImage } from "./cms-image";
 import { CtaButton } from "./cta-button";
 import React from "react";
+import { MotionWrapper } from "@/utils/animations";
 
 function useParallax(distance = 80) {
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -41,52 +42,6 @@ function useParallax(distance = 80) {
   const rotate = useTransform(scrollYProgress, [0, 0.5, 1], [-8, 0, 8]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.15, 1, 1.1]);
   return { ref, y, rotate, scale };
-}
-
-function MotionWrapper({
-  children,
-  delay = 0,
-  y = 40,
-  scale = 0.88,
-  rotate = 0,
-  once = true,
-  amount = 0.22,
-}: {
-  children: React.ReactNode;
-  delay?: number;
-  y?: number;
-  scale?: number;
-  rotate?: number;
-  once?: boolean;
-  amount?: number;
-}) {
-  const reduceMotion = useReducedMotion();
-
-  return (
-    <motion.div
-      initial={
-        reduceMotion
-          ? false
-          : { opacity: 0, y, scale, rotate, filter: "blur(12px)" }
-      }
-      whileInView={
-        reduceMotion
-          ? undefined
-          : { opacity: 1, y: 0, scale: 1, rotate: 0, filter: "blur(0px)" }
-      }
-      viewport={{ once, amount }}
-      transition={{
-        type: "spring",
-        stiffness: 90,
-        damping: 18,
-        mass: 0.9,
-        delay,
-      }}
-      style={{ willChange: "transform, opacity, filter" }}
-    >
-      {children}
-    </motion.div>
-  );
 }
 
 export function Eyebrow({

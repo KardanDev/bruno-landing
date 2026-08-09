@@ -9,11 +9,12 @@ import {
   Text,
 } from "@chakra-ui/react";
 import type { Metadata } from "next";
-import { PageHero } from "@/components/site/blocks";
+import { Eyebrow } from "@/components/site/blocks";
 import { ContactForm } from "@/components/site/contact-form";
 import { getContactPage, getSettings } from "@/sanity/lib/content";
 import { createMetadata } from "@/sanity/lib/metadata";
 import SocialIcon from "@/components/site/social-icon";
+import { MotionWrapper } from "@/utils/animations";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [page, settings] = await Promise.all([getContactPage(), getSettings()]);
@@ -26,7 +27,8 @@ export default async function ContactPage() {
 
   return (
     <>
-      <PageHero hero={page.hero} />
+      {/* <PageHero hero={page.hero} /> */}
+
       <Box as="section" py={{ base: "20", md: "28" }}>
         <Container maxW="8xl" px={{ base: "5", md: "8" }}>
           <SimpleGrid
@@ -35,10 +37,15 @@ export default async function ContactPage() {
             gap={{ base: "12", lg: "20" }}
           >
             <Stack gap="6" maxW="2xl">
+              {page.hero.eyebrow ? (
+                <MotionWrapper y={16} scale={0.98}>
+                  <Eyebrow color="gold.300">{page.hero.eyebrow}</Eyebrow>
+                </MotionWrapper>
+              ) : null}
               <Heading
-                color="ink.900"
+                color="ivory.100"
                 fontFamily="heading"
-                fontSize={{ base: "4xl", md: "6xl" }}
+                fontSize={{ base: "4xl", md: "5xl" }}
                 fontWeight="400"
                 letterSpacing="-0.04em"
                 lineHeight="0.98"
@@ -47,8 +54,8 @@ export default async function ContactPage() {
               </Heading>
               {page.form.description ? (
                 <Text
-                  color="ink.700"
-                  fontSize={{ base: "lg", md: "xl" }}
+                  color="ivory.200"
+                  fontSize={{ base: "md", md: "lg" }}
                   lineHeight="1.75"
                 >
                   {page.form.description}
@@ -64,7 +71,7 @@ export default async function ContactPage() {
               p={{ base: "7", md: "9" }}
             >
               {page.contactNote ? (
-                <Text color="ink.700" fontSize="lg" lineHeight="1.75">
+                <Text color="ivory.200" fontSize="lg" lineHeight="1.75">
                   {page.contactNote}
                 </Text>
               ) : null}
