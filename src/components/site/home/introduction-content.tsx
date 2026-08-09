@@ -55,7 +55,7 @@ const IntroductionContent = ({ page }: Props) => {
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              objectFit: "fill",
             }}
           />
         </motion.div>

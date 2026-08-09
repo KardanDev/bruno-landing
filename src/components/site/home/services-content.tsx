@@ -46,7 +46,7 @@ const ServicesContent = ({ page }: Props) => {
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              objectFit: "fill",
             }}
           />
         </motion.div>
@@ -54,7 +54,15 @@ const ServicesContent = ({ page }: Props) => {
 
       {/* Background overlay */}
       {page.servicesBanner && (
-        <Box position="absolute" inset={0} zIndex={1} bg="blackAlpha.700" />
+        <Box
+          position="absolute"
+          inset={0}
+          zIndex={1}
+          bgGradient={{
+            base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 45%, blackAlpha.300 100%)",
+            lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 40%, blackAlpha.200 75%, transparent 100%)",
+          }}
+        />
       )}
 
       <Container
