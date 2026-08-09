@@ -10,12 +10,11 @@ import {
   Stack,
   Text,
 } from "@chakra-ui/react";
-import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import NextLink from "next/link";
 import { usePathname } from "next/navigation";
-import { useRef, useState } from "react";
+import { useState } from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 
 import type { Settings } from "@/sanity/lib/types";
@@ -41,12 +40,12 @@ export function SiteHeader({ settings }: { settings: Settings }) {
       w={"full"}
       transition="background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease, box-shadow .25s ease"
     >
-      <Container maxW="8xl" px={{ base: "5", md: "8" }} position="relative">
+      <Container maxW="11/12" px={{ base: "5", md: "0" }} position="relative">
         <Flex align="center" justify="space-between" minH="20">
           <Link asChild _hover={{ textDecoration: "none" }}>
             <NextLink href="/">
               {!!settings.siteLogo ? (
-                <CmsImage image={settings.siteLogo} width={50} height={50} />
+                <CmsImage image={settings.siteLogo} width={200} height={200} />
               ) : (
                 <HStack gap="3">
                   <Flex

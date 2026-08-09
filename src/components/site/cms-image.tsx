@@ -1,4 +1,4 @@
-import { Box, Image, Text } from "@chakra-ui/react";
+import { Box, Text } from "@chakra-ui/react";
 import { SanityImage as ImageComponent } from "sanity-image";
 import { SanityImage } from "@/sanity/lib/types";
 import { CSSProperties } from "react";
