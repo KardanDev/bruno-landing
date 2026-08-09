@@ -35,7 +35,7 @@ export default async function PricingPage() {
               <AnimatedReveal delay={index * 0.08} key={plan._key}>
                 <Stack
                   bg="ink.700"
-                  borderColor={plan.featured ? "wine.800" : "border"}
+                  borderColor={plan.featured ? "gold.400" : "border"}
                   borderRadius="editorial"
                   borderWidth={plan.featured ? "2px" : "1px"}
                   color="ivory.50"
