@@ -5,9 +5,10 @@ import {
   Stack,
   Heading,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { motion, useReducedMotion } from "motion/react";
-import React from "react";
+import React, { useMemo } from "react";
 import { AnimatedReveal } from "../animated-reveal";
 import { Eyebrow } from "../blocks";
 import { CtaButton } from "../cta-button";
@@ -21,6 +22,18 @@ type Props = {
 const IntroductionContent = ({ page }: Props) => {
   const reduceMotion = useReducedMotion();
 
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  });
+
+  const selectedImage = useMemo(() => {
+    if (isMobile && page.introductionBannerMobile) {
+      return page.introductionBannerMobile;
+    }
+    return page.introductionBanner;
+  }, [isMobile, page.introductionBanner, page.introductionBannerMobile]);
+
   return (
     <Box
       as="section"
@@ -32,7 +45,7 @@ const IntroductionContent = ({ page }: Props) => {
       alignItems="center"
     >
       {/* Background image */}
-      {page.introductionBanner && (
+      {selectedImage && (
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -49,8 +62,8 @@ const IntroductionContent = ({ page }: Props) => {
           }}
         >
           <CmsImage
-            image={page.introductionBanner}
-            alt={page.introductionBanner.alt || ""}
+            image={selectedImage}
+            alt={selectedImage?.alt || ""}
             style={{
               width: "100%",
               height: "100%",
@@ -60,16 +73,17 @@ const IntroductionContent = ({ page }: Props) => {
         </motion.div>
       )}
 
-      {/* Dark overlay */}
-      <Box
-        position="absolute"
-        inset={0}
-        zIndex={1}
-        bgGradient={{
-          base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 45%, blackAlpha.300 100%)",
-          lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 40%, blackAlpha.200 75%, transparent 100%)",
-        }}
-      />
+      {selectedImage && (
+        <Box
+          position="absolute"
+          inset={0}
+          zIndex={1}
+          bgGradient={{
+            base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 45%, blackAlpha.300 100%)",
+            lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 40%, blackAlpha.200 75%, transparent 100%)",
+          }}
+        />
+      )}
 
       {/* Content */}
       <Container

@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Box,
   Container,
@@ -5,9 +7,10 @@ import {
   Stack,
   Heading,
   Text,
+  useBreakpointValue,
 } from "@chakra-ui/react";
 import { motion, useReducedMotion } from "motion/react";
-import React from "react";
+import React, { useMemo } from "react";
 import { AnimatedReveal } from "../animated-reveal";
 import { SectionHeading } from "../blocks";
 import { CmsImage } from "../cms-image";
@@ -19,6 +22,17 @@ type Props = {
 
 const TimelineContent = ({ page }: Props) => {
   const reduceMotion = useReducedMotion();
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  });
+
+  const selectedImage = useMemo(() => {
+    if (isMobile && page.timelineBannerMobile) {
+      return page.timelineBannerMobile;
+    }
+    return page.timelineBanner;
+  }, [isMobile, page.timelineBanner, page.timelineBannerMobile]);
 
   return (
     <Box
@@ -29,8 +43,7 @@ const TimelineContent = ({ page }: Props) => {
       color="ivory.50"
       py={{ base: "20", md: "28" }}
     >
-      {/* Background image */}
-      {page.timelineBanner && (
+      {selectedImage && (
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -47,8 +60,8 @@ const TimelineContent = ({ page }: Props) => {
           }}
         >
           <CmsImage
-            image={page.timelineBanner}
-            alt={page.timelineBanner.alt || ""}
+            image={selectedImage}
+            alt={selectedImage?.alt || ""}
             style={{
               width: "100%",
               height: "100%",
@@ -59,7 +72,7 @@ const TimelineContent = ({ page }: Props) => {
       )}
 
       {/* Background overlay */}
-      {page.timelineBanner && (
+      {selectedImage && (
         <Box
           position="absolute"
           inset={0}

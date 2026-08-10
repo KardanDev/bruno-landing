@@ -1,6 +1,14 @@
-import { Box, Container, Flex, Stack } from "@chakra-ui/react";
+"use client";
+
+import {
+  Box,
+  Container,
+  Flex,
+  Stack,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { motion, useReducedMotion } from "motion/react";
-import React from "react";
+import React, { useMemo } from "react";
 import { SectionHeading, ServiceCard } from "../blocks";
 import { CtaButton } from "../cta-button";
 import { CmsImage } from "../cms-image";
@@ -12,6 +20,18 @@ type Props = {
 
 const ServicesContent = ({ page }: Props) => {
   const reduceMotion = useReducedMotion();
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  });
+
+  const selectedImage = useMemo(() => {
+    if (isMobile && page.servicesBannerMobile) {
+      return page.servicesBannerMobile;
+    }
+
+    return page.servicesBanner;
+  }, [isMobile, page.servicesBanner, page.servicesBannerMobile]);
 
   return (
     <Box
@@ -23,7 +43,7 @@ const ServicesContent = ({ page }: Props) => {
       py={{ base: "20", md: "20" }}
     >
       {/* Background image */}
-      {page.servicesBanner && (
+      {selectedImage && (
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -40,8 +60,8 @@ const ServicesContent = ({ page }: Props) => {
           }}
         >
           <CmsImage
-            image={page.servicesBanner}
-            alt={page.servicesBanner.alt || ""}
+            image={selectedImage}
+            alt={selectedImage?.alt || ""}
             mode="cover"
             style={{
               width: "100%",
@@ -53,7 +73,7 @@ const ServicesContent = ({ page }: Props) => {
       )}
 
       {/* Background overlay */}
-      {page.servicesBanner && (
+      {selectedImage && (
         <Box
           position="absolute"
           inset={0}

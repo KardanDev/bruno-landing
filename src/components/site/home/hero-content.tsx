@@ -1,7 +1,17 @@
+"use client";
+
 import { Reveal, ParallaxImage } from "@/utils/animations";
-import { Box, Flex, Stack, Heading, Text } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  Stack,
+  Heading,
+  Text,
+  useBreakpoint,
+  useBreakpointValue,
+} from "@chakra-ui/react";
 import { motion, useReducedMotion } from "motion/react";
-import React from "react";
+import React, { useMemo } from "react";
 import { Eyebrow } from "../blocks";
 import { CtaButton } from "../cta-button";
 import { HomePage } from "@/sanity/lib/types";
@@ -12,6 +22,17 @@ type Props = {
 
 const HeroContent = ({ page }: Props) => {
   const reduceMotion = useReducedMotion();
+  const isMobile = useBreakpointValue({
+    base: true,
+    md: false,
+  });
+
+  const selectedImage = useMemo(() => {
+    if (isMobile && page.hero.imageMobile) {
+      return page.hero.imageMobile;
+    }
+    return page.hero.image;
+  }, [isMobile, page.hero.image, page.hero.imageMobile]);
 
   return (
     <Box position="relative" minH="100vh" h="100%" overflow="hidden">
@@ -34,7 +55,7 @@ const HeroContent = ({ page }: Props) => {
           alt={page.hero.image?.alt}
           fallbackLabel="MD"
           mode="cover"
-          image={page.hero.image}
+          image={selectedImage}
           useTransformProps={false}
         />
       </motion.div>

@@ -12,7 +12,7 @@ const IMAGE_FIELDS = `
 `;
 
 const CTA_FIELDS = "label, href";
-const HERO_FIELDS = `eyebrow, title, description, cta{${CTA_FIELDS}}, image{${IMAGE_FIELDS}}`;
+const HERO_FIELDS = `eyebrow, title, description, cta{${CTA_FIELDS}}, image{${IMAGE_FIELDS}}, imageMobile{${IMAGE_FIELDS}}`;
 const FAQ_FIELDS = "_key, question, answer";
 const SERVICE_CARD_FIELDS = `_id, title, "slug": slug.current, eyebrow, summary, heroImage{${IMAGE_FIELDS}}, orderRank`;
 const POST_CARD_FIELDS = `_id, title, "slug": slug.current, excerpt, publishedAt, mainImage{${IMAGE_FIELDS}}`;
@@ -41,29 +41,35 @@ export const HOME_PAGE_QUERY = defineQuery(`
     hero{${HERO_FIELDS}},
     decorativeSignature,
     introductionBanner,
+    introductionBannerMobile,
     introductionEyebrow,
     introductionTitle,
     introductionText,
     servicesBanner,
+    servicesBannerMobile,
     servicesEyebrow,
     servicesTitle,
     servicesDescription,
     servicesCta{${CTA_FIELDS}},
     featuredServices[]->{${SERVICE_CARD_FIELDS}},
     timelineBanner,
+    timelineBannerMobile,
     timelineEyebrow,
     timelineTitle,
     timelineDescription,
     timeline[]{_key, title, description},
     valuesBanner,
+    valuesBannerMobile,
     valuesTitle,
     values[]{_key, title, description},
     faqBanner,
+    faqBannerMobile,
     faqTitle,
     faqDescription,
     faqCta{${CTA_FIELDS}},
     faqs[]{${FAQ_FIELDS}},
     articlesBanner,
+    articlesBannerMobile,
     articlesTitle,
     articlesDescription,
     articlesCta{${CTA_FIELDS}},
