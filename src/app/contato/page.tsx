@@ -23,7 +23,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default async function ContactPage() {
   const [page, settings] = await Promise.all([getContactPage(), getSettings()]);
-  console.log(page);
 
   return (
     <>

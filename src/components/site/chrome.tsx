@@ -7,6 +7,7 @@ import {
   Flex,
   HStack,
   Icon,
+  IconButton,
   Input,
   Link,
   Stack,
@@ -24,9 +25,10 @@ import type { Settings } from "@/sanity/lib/types";
 import { navigationLinks } from "@/utils/constants";
 import { CtaButton } from "./cta-button";
 import { CmsImage } from "./cms-image";
-import { FaLocationPin, FaMapLocation } from "react-icons/fa6";
 import { BiPhone } from "react-icons/bi";
 import { GrMail } from "react-icons/gr";
+import { MdSend } from "react-icons/md";
+import { Tooltip } from "../ui/tooltip";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -219,17 +221,33 @@ export function SiteFooter({ settings }: { settings: Settings }) {
                 Sign up to our newsletter!
               </Text>
               <form style={{ width: "100%" }}>
-                <Input
-                  w="full"
-                  type="email"
-                  bg="ink.700"
-                  borderColor={"border"}
-                  color="ivory.300"
-                  placeholder="Your email address"
-                  _placeholder={{
-                    color: "ivory.300",
-                  }}
-                />
+                <HStack>
+                  <Input
+                    w="full"
+                    type="email"
+                    bg="ink.700"
+                    borderColor={"border"}
+                    color="ivory.300"
+                    placeholder="Your email address"
+                    _placeholder={{
+                      color: "ivory.300",
+                    }}
+                  />
+                  <Tooltip content="Submit email to newsletter" showArrow>
+                    <IconButton
+                      variant="subtle"
+                      bg="ink.700"
+                      color="ivory.200"
+                      _hover={{
+                        backgroundColor: "ink.900",
+                        borderColor: "ink.700",
+                      }}
+                      type="submit"
+                    >
+                      <Icon as={MdSend} />
+                    </IconButton>
+                  </Tooltip>
+                </HStack>
               </form>
             </VStack>
           </Flex>

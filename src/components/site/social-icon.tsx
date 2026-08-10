@@ -25,7 +25,11 @@ const SocialIcon = ({ icon, href }: Props) => {
         color: "ivory.50",
       }}
     >
-      <Link href={href}>
+      <Link
+        href={href}
+        rel={href.toString().startsWith("http") ? "noreferrer" : undefined}
+        target={href.toString().startsWith("http") ? "_blank" : undefined}
+      >
         <IconComponent />
       </Link>
     </IconButton>
