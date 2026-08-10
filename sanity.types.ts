@@ -21,6 +21,7 @@ export type Settings = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  siteLogo?: CmsImage;
   siteName: string;
   tagline: string;
   monogram?: string;
@@ -50,6 +51,22 @@ export type CallToAction = {
   _type: "callToAction";
   label: string;
   href: string;
+};
+
+export type SanityImageAssetReference = {
+  _ref: string;
+  _type: "reference";
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
+};
+
+export type CmsImage = {
+  _type: "cmsImage";
+  asset?: SanityImageAssetReference;
+  media?: unknown;
+  hotspot?: SanityImageHotspot;
+  crop?: SanityImageCrop;
+  alt: string;
 };
 
 export type ServicesPage = {
@@ -116,22 +133,6 @@ export type RichText = Array<{
   _key: string;
 } & InlineImage>;
 
-export type SanityImageAssetReference = {
-  _ref: string;
-  _type: "reference";
-  _weak?: boolean;
-  [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-};
-
-export type CmsImage = {
-  _type: "cmsImage";
-  asset?: SanityImageAssetReference;
-  media?: unknown;
-  hotspot?: SanityImageHotspot;
-  crop?: SanityImageCrop;
-  alt: string;
-};
-
 export type Slug = {
   _type: "slug";
   current: string;
@@ -182,9 +183,12 @@ export type HomePage = {
   _updatedAt: string;
   _rev: string;
   hero: PageHero;
+  decorativeSignature?: CmsImage;
+  introductionBanner?: CmsImage;
   introductionEyebrow?: string;
   introductionTitle: string;
   introductionText: string;
+  servicesBanner?: CmsImage;
   servicesEyebrow?: string;
   servicesTitle: string;
   servicesDescription?: string;
@@ -192,22 +196,26 @@ export type HomePage = {
   featuredServices?: Array<{
     _key: string;
   } & ServiceReference>;
+  timelineBanner?: CmsImage;
   timelineEyebrow?: string;
   timelineTitle: string;
   timelineDescription?: string;
   timeline?: Array<{
     _key: string;
   } & TimelineStep>;
+  valuesBanner?: CmsImage;
   valuesTitle: string;
   values?: Array<{
     _key: string;
   } & ValueItem>;
+  faqBanner?: CmsImage;
   faqTitle: string;
   faqDescription?: string;
   faqCta?: CallToAction;
   faqs?: Array<{
     _key: string;
   } & FaqItem>;
+  articlesBanner?: CmsImage;
   articlesTitle: string;
   articlesDescription?: string;
   articlesCta?: CallToAction;
@@ -238,6 +246,10 @@ export type ContactPage = {
   hero: PageHero;
   form: ContactFormCopy;
   contactNote?: string;
+  facebookLink?: string;
+  instagramLink?: string;
+  whatsappLink?: string;
+  linkedInLink?: string;
   seo?: Seo;
 };
 
@@ -443,7 +455,7 @@ export type Geopoint = {
   alt?: number;
 };
 
-export type AllSanitySchemaTypes = Settings | Seo | CallToAction | ServicesPage | PageHero | Service | RichText | SanityImageAssetReference | CmsImage | Slug | PricingPage | Post | ServiceReference | HomePage | FaqPage | ContactPage | ContactFormCopy | BlogPage | AboutPage | ValueItem | TimelineStep | Stat | PricingPlan | NavigationItem | InlineImage | FaqItem | SanityImageCrop | SanityImageHotspot | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
+export type AllSanitySchemaTypes = Settings | Seo | CallToAction | SanityImageAssetReference | CmsImage | ServicesPage | PageHero | Service | RichText | Slug | PricingPage | Post | ServiceReference | HomePage | FaqPage | ContactPage | ContactFormCopy | BlogPage | AboutPage | ValueItem | TimelineStep | Stat | PricingPlan | NavigationItem | InlineImage | FaqItem | SanityImageCrop | SanityImageHotspot | SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityImageMetadata | SanityFileAsset | SanityAssetSourceData | SanityImageAsset | Geopoint;
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: SETTINGS_QUERY
@@ -496,7 +508,7 @@ export type SETTINGS_QUERY_RESULT = {
     } | null;
   } | null;
 } | {
-  siteLogo: null;
+  siteLogo: CmsImage | null;
   siteName: string;
   tagline: string;
   monogram: string | null;
@@ -543,28 +555,40 @@ export type SETTINGS_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: HOME_PAGE_QUERY
-// Query: *[_id == "homePage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    decorativeSignature,    introductionEyebrow,    introductionTitle,    introductionText,    servicesEyebrow,    servicesTitle,    servicesDescription,    servicesCta{label, href},    featuredServices[]->{_id, title, "slug": slug.current, eyebrow, summary, heroImage{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, orderRank},    timelineEyebrow,    timelineTitle,    timelineDescription,    timeline[]{_key, title, description},    valuesTitle,    values[]{_key, title, description},    faqTitle,    faqDescription,    faqCta{label, href},    faqs[]{_key, question, answer},    articlesTitle,    articlesDescription,    articlesCta{label, href},    "latestPosts": *[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...3]{_id, title, "slug": slug.current, excerpt, publishedAt, mainImage{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
+// Query: *[_id == "homePage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    decorativeSignature,    introductionBanner,    introductionBannerMobile,    introductionEyebrow,    introductionTitle,    introductionText,    servicesBanner,    servicesBannerMobile,    servicesEyebrow,    servicesTitle,    servicesDescription,    servicesCta{label, href},    featuredServices[]->{_id, title, "slug": slug.current, eyebrow, summary, heroImage{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, orderRank},    timelineBanner,    timelineBannerMobile,    timelineEyebrow,    timelineTitle,    timelineDescription,    timeline[]{_key, title, description},    valuesBanner,    valuesBannerMobile,    valuesTitle,    values[]{_key, title, description},    faqBanner,    faqBannerMobile,    faqTitle,    faqDescription,    faqCta{label, href},    faqs[]{_key, question, answer},    articlesBanner,    articlesBannerMobile,    articlesTitle,    articlesDescription,    articlesCta{label, href},    "latestPosts": *[_type == "post" && defined(slug.current)] | order(publishedAt desc)[0...3]{_id, title, "slug": slug.current, excerpt, publishedAt, mainImage{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
 export type HOME_PAGE_QUERY_RESULT = {
   hero: null;
   decorativeSignature: null;
+  introductionBanner: null;
+  introductionBannerMobile: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
+  servicesBanner: null;
+  servicesBannerMobile: null;
   servicesEyebrow: null;
   servicesTitle: null;
   servicesDescription: null;
   servicesCta: null;
   featuredServices: null;
+  timelineBanner: null;
+  timelineBannerMobile: null;
   timelineEyebrow: null;
   timelineTitle: null;
   timelineDescription: null;
   timeline: null;
+  valuesBanner: null;
+  valuesBannerMobile: null;
   valuesTitle: null;
   values: null;
+  faqBanner: null;
+  faqBannerMobile: null;
   faqTitle: null;
   faqDescription: null;
   faqCta: null;
   faqs: null;
+  articlesBanner: null;
+  articlesBannerMobile: null;
   articlesTitle: null;
   articlesDescription: null;
   articlesCta: null;
@@ -596,24 +620,36 @@ export type HOME_PAGE_QUERY_RESULT = {
 } | {
   hero: null;
   decorativeSignature: null;
+  introductionBanner: null;
+  introductionBannerMobile: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
+  servicesBanner: null;
+  servicesBannerMobile: null;
   servicesEyebrow: null;
   servicesTitle: null;
   servicesDescription: null;
   servicesCta: null;
   featuredServices: null;
+  timelineBanner: null;
+  timelineBannerMobile: null;
   timelineEyebrow: null;
   timelineTitle: null;
   timelineDescription: null;
   timeline: null;
+  valuesBanner: null;
+  valuesBannerMobile: null;
   valuesTitle: null;
   values: null;
+  faqBanner: null;
+  faqBannerMobile: null;
   faqTitle: null;
   faqDescription: null;
   faqCta: null;
   faqs: null;
+  articlesBanner: null;
+  articlesBannerMobile: null;
   articlesTitle: null;
   articlesDescription: null;
   articlesCta: null;
@@ -686,26 +722,39 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   decorativeSignature: null;
+  introductionBanner: null;
+  introductionBannerMobile: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
+  servicesBanner: null;
+  servicesBannerMobile: null;
   servicesEyebrow: null;
   servicesTitle: null;
   servicesDescription: null;
   servicesCta: null;
   featuredServices: null;
+  timelineBanner: null;
+  timelineBannerMobile: null;
   timelineEyebrow: null;
   timelineTitle: null;
   timelineDescription: null;
   timeline: null;
+  valuesBanner: null;
+  valuesBannerMobile: null;
   valuesTitle: null;
   values: null;
+  faqBanner: null;
+  faqBannerMobile: null;
   faqTitle: null;
   faqDescription: null;
   faqCta: null;
   faqs: null;
+  articlesBanner: null;
+  articlesBannerMobile: null;
   articlesTitle: null;
   articlesDescription: null;
   articlesCta: null;
@@ -756,20 +805,30 @@ export type HOME_PAGE_QUERY_RESULT = {
 } | {
   hero: null;
   decorativeSignature: null;
+  introductionBanner: null;
+  introductionBannerMobile: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
+  servicesBanner: null;
+  servicesBannerMobile: null;
   servicesEyebrow: null;
   servicesTitle: null;
   servicesDescription: null;
   servicesCta: null;
   featuredServices: null;
+  timelineBanner: null;
+  timelineBannerMobile: null;
   timelineEyebrow: null;
   timelineTitle: null;
   timelineDescription: null;
   timeline: null;
+  valuesBanner: null;
+  valuesBannerMobile: null;
   valuesTitle: null;
   values: null;
+  faqBanner: null;
+  faqBannerMobile: null;
   faqTitle: string | null;
   faqDescription: null;
   faqCta: null;
@@ -778,6 +837,8 @@ export type HOME_PAGE_QUERY_RESULT = {
     question: string;
     answer: string;
   }> | null;
+  articlesBanner: null;
+  articlesBannerMobile: null;
   articlesTitle: null;
   articlesDescription: null;
   articlesCta: null;
@@ -850,26 +911,39 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   decorativeSignature: null;
+  introductionBanner: null;
+  introductionBannerMobile: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
+  servicesBanner: null;
+  servicesBannerMobile: null;
   servicesEyebrow: null;
   servicesTitle: null;
   servicesDescription: null;
   servicesCta: null;
   featuredServices: null;
+  timelineBanner: null;
+  timelineBannerMobile: null;
   timelineEyebrow: null;
   timelineTitle: null;
   timelineDescription: null;
   timeline: null;
+  valuesBanner: null;
+  valuesBannerMobile: null;
   valuesTitle: null;
   values: null;
+  faqBanner: null;
+  faqBannerMobile: null;
   faqTitle: null;
   faqDescription: null;
   faqCta: null;
   faqs: null;
+  articlesBanner: null;
+  articlesBannerMobile: null;
   articlesTitle: null;
   articlesDescription: null;
   articlesCta: null;
@@ -920,6 +994,7 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -966,30 +1041,43 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   decorativeSignature: null;
+  introductionBanner: null;
+  introductionBannerMobile: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
+  servicesBanner: null;
+  servicesBannerMobile: null;
   servicesEyebrow: null;
   servicesTitle: null;
   servicesDescription: null;
   servicesCta: null;
   featuredServices: null;
+  timelineBanner: null;
+  timelineBannerMobile: null;
   timelineEyebrow: null;
   timelineTitle: null;
   timelineDescription: null;
   timeline: null;
+  valuesBanner: null;
+  valuesBannerMobile: null;
   valuesTitle: string;
   values: Array<{
     _key: string;
     title: string;
     description: string;
   }> | null;
+  faqBanner: null;
+  faqBannerMobile: null;
   faqTitle: null;
   faqDescription: null;
   faqCta: null;
   faqs: null;
+  articlesBanner: null;
+  articlesBannerMobile: null;
   articlesTitle: null;
   articlesDescription: null;
   articlesCta: null;
@@ -1040,6 +1128,7 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -1086,22 +1175,33 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   decorativeSignature: null;
+  introductionBanner: null;
+  introductionBannerMobile: null;
   introductionEyebrow: null;
   introductionTitle: null;
   introductionText: null;
+  servicesBanner: null;
+  servicesBannerMobile: null;
   servicesEyebrow: null;
   servicesTitle: null;
   servicesDescription: null;
   servicesCta: null;
   featuredServices: null;
+  timelineBanner: null;
+  timelineBannerMobile: null;
   timelineEyebrow: null;
   timelineTitle: null;
   timelineDescription: null;
   timeline: null;
+  valuesBanner: null;
+  valuesBannerMobile: null;
   valuesTitle: null;
   values: null;
+  faqBanner: null;
+  faqBannerMobile: null;
   faqTitle: null;
   faqDescription: null;
   faqCta: null;
@@ -1110,6 +1210,8 @@ export type HOME_PAGE_QUERY_RESULT = {
     question: string;
     answer: string;
   }> | null;
+  articlesBanner: null;
+  articlesBannerMobile: null;
   articlesTitle: null;
   articlesDescription: null;
   articlesCta: null;
@@ -1160,6 +1262,7 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -1206,11 +1309,16 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
-  decorativeSignature: null;
+  decorativeSignature: CmsImage | null;
+  introductionBanner: CmsImage | null;
+  introductionBannerMobile: null;
   introductionEyebrow: string | null;
   introductionTitle: string;
   introductionText: string;
+  servicesBanner: CmsImage | null;
+  servicesBannerMobile: null;
   servicesEyebrow: string | null;
   servicesTitle: string;
   servicesDescription: string | null;
@@ -1242,6 +1350,8 @@ export type HOME_PAGE_QUERY_RESULT = {
     } | null;
     orderRank: number | null;
   }> | null;
+  timelineBanner: CmsImage | null;
+  timelineBannerMobile: null;
   timelineEyebrow: string | null;
   timelineTitle: string;
   timelineDescription: string | null;
@@ -1250,12 +1360,16 @@ export type HOME_PAGE_QUERY_RESULT = {
     title: string;
     description: string;
   }> | null;
+  valuesBanner: CmsImage | null;
+  valuesBannerMobile: null;
   valuesTitle: string;
   values: Array<{
     _key: string;
     title: string;
     description: string;
   }> | null;
+  faqBanner: CmsImage | null;
+  faqBannerMobile: null;
   faqTitle: string;
   faqDescription: string | null;
   faqCta: {
@@ -1267,6 +1381,8 @@ export type HOME_PAGE_QUERY_RESULT = {
     question: string;
     answer: string;
   }> | null;
+  articlesBanner: CmsImage | null;
+  articlesBannerMobile: null;
   articlesTitle: string;
   articlesDescription: string | null;
   articlesCta: {
@@ -1320,6 +1436,7 @@ export type HOME_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -1345,7 +1462,7 @@ export type HOME_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: ABOUT_PAGE_QUERY
-// Query: *[_id == "aboutPage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    storyEyebrow,    storyTitle,    story,    portrait{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }},    valuesTitle,    values[]{_key, title, description},    stats[]{_key, value, label},    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
+// Query: *[_id == "aboutPage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    storyEyebrow,    storyTitle,    story,    portrait{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }},    valuesTitle,    values[]{_key, title, description},    stats[]{_key, value, label},    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
 export type ABOUT_PAGE_QUERY_RESULT = {
   hero: null;
   storyEyebrow: null;
@@ -1412,6 +1529,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   storyEyebrow: null;
   storyTitle: null;
@@ -1466,6 +1584,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   storyEyebrow: null;
   storyTitle: null;
@@ -1498,6 +1617,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -1544,6 +1664,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   storyEyebrow: null;
   storyTitle: null;
@@ -1580,6 +1701,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -1626,6 +1748,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   storyEyebrow: string | null;
   storyTitle: string;
@@ -1681,6 +1804,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -1706,7 +1830,7 @@ export type ABOUT_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: SERVICES_PAGE_QUERY
-// Query: *[_id == "servicesPage"][0]{hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}, closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}, seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}}
+// Query: *[_id == "servicesPage"][0]{hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}, closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}, seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}}
 export type SERVICES_PAGE_QUERY_RESULT = {
   hero: null;
   closingCta: null;
@@ -1759,6 +1883,7 @@ export type SERVICES_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   closingCta: null;
   seo: {
@@ -1806,6 +1931,7 @@ export type SERVICES_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   closingCta: {
     eyebrow: string | null;
@@ -1831,6 +1957,7 @@ export type SERVICES_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -1856,7 +1983,7 @@ export type SERVICES_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: BLOG_PAGE_QUERY
-// Query: *[_id == "blogPage"][0]{hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}, seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}}
+// Query: *[_id == "blogPage"][0]{hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}, seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}}
 export type BLOG_PAGE_QUERY_RESULT = {
   hero: null;
   seo: null;
@@ -1907,6 +2034,7 @@ export type BLOG_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   seo: {
     title: string | null;
@@ -1932,7 +2060,7 @@ export type BLOG_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: PRICING_PAGE_QUERY
-// Query: *[_id == "pricingPage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    plans[]{_key, name, price, description, features, cta{label, href}, featured},    note,    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
+// Query: *[_id == "pricingPage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    plans[]{_key, name, price, description, features, cta{label, href}, featured},    note,    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
 export type PRICING_PAGE_QUERY_RESULT = {
   hero: null;
   plans: null;
@@ -1989,6 +2117,7 @@ export type PRICING_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   plans: null;
   note: null;
@@ -2038,6 +2167,7 @@ export type PRICING_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   plans: null;
   note: null;
@@ -2065,6 +2195,7 @@ export type PRICING_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -2111,6 +2242,7 @@ export type PRICING_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   plans: Array<{
     _key: string;
@@ -2149,6 +2281,7 @@ export type PRICING_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -2174,7 +2307,7 @@ export type PRICING_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: FAQ_PAGE_QUERY
-// Query: *[_id == "faqPage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    faqs[]{_key, question, answer},    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
+// Query: *[_id == "faqPage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    faqs[]{_key, question, answer},    closingCta{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
 export type FAQ_PAGE_QUERY_RESULT = {
   hero: null;
   faqs: null;
@@ -2229,6 +2362,7 @@ export type FAQ_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   faqs: null;
   closingCta: null;
@@ -2305,6 +2439,7 @@ export type FAQ_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   faqs: null;
   closingCta: {
@@ -2331,6 +2466,7 @@ export type FAQ_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -2377,6 +2513,7 @@ export type FAQ_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   faqs: Array<{
     _key: string;
@@ -2407,6 +2544,7 @@ export type FAQ_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   } | null;
   seo: {
     title: string | null;
@@ -2432,16 +2570,24 @@ export type FAQ_PAGE_QUERY_RESULT = {
 
 // Source: ../web/src/sanity/lib/queries.ts
 // Variable: CONTACT_PAGE_QUERY
-// Query: *[_id == "contactPage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    form{heading, description, nameLabel, emailLabel, subjectLabel, messageLabel, submitLabel},    contactNote,    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
+// Query: *[_id == "contactPage"][0]{    hero{eyebrow, title, description, cta{label, href}, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}, imageMobile{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}},    form{heading, description, nameLabel, emailLabel, subjectLabel, messageLabel, submitLabel},    contactNote,    facebookLink,    instagramLink,    linkedInLink,    whatsappLink,    seo{title, description, image{  alt,  crop,  hotspot,  asset->{    _id,    url,    metadata {lqip, dimensions {width, height}}  }}}  }
 export type CONTACT_PAGE_QUERY_RESULT = {
   hero: null;
   form: null;
   contactNote: null;
+  facebookLink: null;
+  instagramLink: null;
+  linkedInLink: null;
+  whatsappLink: null;
   seo: null;
 } | {
   hero: null;
   form: null;
   contactNote: null;
+  facebookLink: null;
+  instagramLink: null;
+  linkedInLink: null;
+  whatsappLink: null;
   seo: {
     title: string | null;
     description: string | null;
@@ -2487,9 +2633,14 @@ export type CONTACT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   form: null;
   contactNote: null;
+  facebookLink: null;
+  instagramLink: null;
+  linkedInLink: null;
+  whatsappLink: null;
   seo: {
     title: string | null;
     description: string | null;
@@ -2535,6 +2686,7 @@ export type CONTACT_PAGE_QUERY_RESULT = {
         } | null;
       } | null;
     } | null;
+    imageMobile: null;
   };
   form: {
     heading: string;
@@ -2546,6 +2698,10 @@ export type CONTACT_PAGE_QUERY_RESULT = {
     submitLabel: string;
   };
   contactNote: string | null;
+  facebookLink: string | null;
+  instagramLink: string | null;
+  linkedInLink: string | null;
+  whatsappLink: string | null;
   seo: {
     title: string | null;
     description: string | null;
@@ -2812,13 +2968,13 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "\n  *[_id == \"settings\"][0]{\n    siteLogo,\n    siteName,\n    tagline,\n    monogram,\n    primaryCta{label, href},\n    navigation[]{_key, label, href},\n    phone,\n    email,\n    address,\n    mapUrl,\n    officeHours,\n    socialLinks[]{_key, label, href},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": SETTINGS_QUERY_RESULT;
-    "\n  *[_id == \"homePage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    decorativeSignature,\n    introductionEyebrow,\n    introductionTitle,\n    introductionText,\n    servicesEyebrow,\n    servicesTitle,\n    servicesDescription,\n    servicesCta{label, href},\n    featuredServices[]->{_id, title, \"slug\": slug.current, eyebrow, summary, heroImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, orderRank},\n    timelineEyebrow,\n    timelineTitle,\n    timelineDescription,\n    timeline[]{_key, title, description},\n    valuesTitle,\n    values[]{_key, title, description},\n    faqTitle,\n    faqDescription,\n    faqCta{label, href},\n    faqs[]{_key, question, answer},\n    articlesTitle,\n    articlesDescription,\n    articlesCta{label, href},\n    \"latestPosts\": *[_type == \"post\" && defined(slug.current)] | order(publishedAt desc)[0...3]{_id, title, \"slug\": slug.current, excerpt, publishedAt, mainImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": HOME_PAGE_QUERY_RESULT;
-    "\n  *[_id == \"aboutPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    storyEyebrow,\n    storyTitle,\n    story,\n    portrait{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n},\n    valuesTitle,\n    values[]{_key, title, description},\n    stats[]{_key, value, label},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": ABOUT_PAGE_QUERY_RESULT;
-    "\n  *[_id == \"servicesPage\"][0]{hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}}\n": SERVICES_PAGE_QUERY_RESULT;
-    "\n  *[_id == \"blogPage\"][0]{hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}}\n": BLOG_PAGE_QUERY_RESULT;
-    "\n  *[_id == \"pricingPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    plans[]{_key, name, price, description, features, cta{label, href}, featured},\n    note,\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": PRICING_PAGE_QUERY_RESULT;
-    "\n  *[_id == \"faqPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    faqs[]{_key, question, answer},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": FAQ_PAGE_QUERY_RESULT;
-    "\n  *[_id == \"contactPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    form{heading, description, nameLabel, emailLabel, subjectLabel, messageLabel, submitLabel},\n    contactNote,\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": CONTACT_PAGE_QUERY_RESULT;
+    "\n  *[_id == \"homePage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    decorativeSignature,\n    introductionBanner,\n    introductionBannerMobile,\n    introductionEyebrow,\n    introductionTitle,\n    introductionText,\n    servicesBanner,\n    servicesBannerMobile,\n    servicesEyebrow,\n    servicesTitle,\n    servicesDescription,\n    servicesCta{label, href},\n    featuredServices[]->{_id, title, \"slug\": slug.current, eyebrow, summary, heroImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, orderRank},\n    timelineBanner,\n    timelineBannerMobile,\n    timelineEyebrow,\n    timelineTitle,\n    timelineDescription,\n    timeline[]{_key, title, description},\n    valuesBanner,\n    valuesBannerMobile,\n    valuesTitle,\n    values[]{_key, title, description},\n    faqBanner,\n    faqBannerMobile,\n    faqTitle,\n    faqDescription,\n    faqCta{label, href},\n    faqs[]{_key, question, answer},\n    articlesBanner,\n    articlesBannerMobile,\n    articlesTitle,\n    articlesDescription,\n    articlesCta{label, href},\n    \"latestPosts\": *[_type == \"post\" && defined(slug.current)] | order(publishedAt desc)[0...3]{_id, title, \"slug\": slug.current, excerpt, publishedAt, mainImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": HOME_PAGE_QUERY_RESULT;
+    "\n  *[_id == \"aboutPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    storyEyebrow,\n    storyTitle,\n    story,\n    portrait{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n},\n    valuesTitle,\n    values[]{_key, title, description},\n    stats[]{_key, value, label},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": ABOUT_PAGE_QUERY_RESULT;
+    "\n  *[_id == \"servicesPage\"][0]{hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}}\n": SERVICES_PAGE_QUERY_RESULT;
+    "\n  *[_id == \"blogPage\"][0]{hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}, seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}}\n": BLOG_PAGE_QUERY_RESULT;
+    "\n  *[_id == \"pricingPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    plans[]{_key, name, price, description, features, cta{label, href}, featured},\n    note,\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": PRICING_PAGE_QUERY_RESULT;
+    "\n  *[_id == \"faqPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    faqs[]{_key, question, answer},\n    closingCta{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": FAQ_PAGE_QUERY_RESULT;
+    "\n  *[_id == \"contactPage\"][0]{\n    hero{eyebrow, title, description, cta{label, href}, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, imageMobile{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}},\n    form{heading, description, nameLabel, emailLabel, subjectLabel, messageLabel, submitLabel},\n    contactNote,\n    facebookLink,\n    instagramLink,\n    linkedInLink,\n    whatsappLink,\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": CONTACT_PAGE_QUERY_RESULT;
     "\n  *[_type == \"service\" && defined(slug.current)] | order(orderRank asc, title asc){_id, title, \"slug\": slug.current, eyebrow, summary, heroImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, orderRank}\n": SERVICES_INDEX_QUERY_RESULT;
     "\n  *[_type == \"service\" && slug.current == $slug][0]{\n    _id,\n    title,\n    \"slug\": slug.current,\n    eyebrow,\n    summary,\n    heroImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n},\n    body[]{\n      ...,\n      _type == \"inlineImage\" => {image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}, caption}\n    },\n    features,\n    faqTitle,\n    faqs[]{_key, question, answer},\n    cta{label, href},\n    orderRank,\n    seo{title, description, image{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n  }\n": SERVICE_DETAIL_QUERY_RESULT;
     "\n  *[_type == \"post\" && defined(slug.current)] | order(publishedAt desc){_id, title, \"slug\": slug.current, excerpt, publishedAt, mainImage{\n  alt,\n  crop,\n  hotspot,\n  asset->{\n    _id,\n    url,\n    metadata {lqip, dimensions {width, height}}\n  }\n}}\n": POSTS_INDEX_QUERY_RESULT;
