@@ -17,8 +17,7 @@ import {
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import NextLink from "next/link";
-import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { LuMenu, LuX } from "react-icons/lu";
 
 import type { Settings } from "@/sanity/lib/types";
@@ -29,146 +28,18 @@ import { BiPhone } from "react-icons/bi";
 import { GrMail } from "react-icons/gr";
 import { MdSend } from "react-icons/md";
 import { Tooltip } from "../ui/tooltip";
+import {
+  motion,
+  MotionValue,
+  useMotionValue,
+  useSpring,
+  useTransform,
+} from "motion/react";
+import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
 
-export function SiteHeader({ settings }: { settings: Settings }) {
-  const [menuOpen, setMenuOpen] = useState(false);
-  const pathname = usePathname();
-
-  return (
-    <Box
-      as="header"
-      position="sticky"
-      top="0"
-      zIndex="1000"
-      bg="#161312"
-      borderBottomWidth="1px"
-      borderColor="ink.900"
-      w={"full"}
-      transition="background-color .25s ease, border-color .25s ease, backdrop-filter .25s ease, box-shadow .25s ease"
-    >
-      <Container maxW="11/12" px={{ base: "5", md: "0" }} position="relative">
-        <Flex align="center" justify="space-between" minH="20">
-          <Link asChild _hover={{ textDecoration: "none" }}>
-            <NextLink href="/">
-              {!!settings.siteLogo ? (
-                <CmsImage image={settings.siteLogo} width={200} height={200} />
-              ) : (
-                <HStack gap="3">
-                  <Flex
-                    align="center"
-                    bg="ink.700"
-                    borderRadius="full"
-                    color="ivory.50"
-                    fontFamily="heading"
-                    fontSize="lg"
-                    h="10"
-                    justify="center"
-                    w="10"
-                  >
-                    {settings.monogram ??
-                      settings.siteName.slice(0, 2).toUpperCase()}
-                  </Flex>
-
-                  <Text
-                    color="ivory.50"
-                    fontFamily="heading"
-                    fontSize={{ base: "lg", md: "xl" }}
-                    fontWeight="400"
-                  >
-                    {settings.siteName}
-                  </Text>
-                </HStack>
-              )}
-            </NextLink>
-          </Link>
-
-          <HStack
-            display={{ base: "none", lg: "flex" }}
-            gap="10"
-            alignItems="center"
-          >
-            <HStack gap="5">
-              {navigationLinks.map((item) => (
-                <Link
-                  key={item._key}
-                  asChild
-                  color={pathname === item.href ? "gold.300" : "ivory.50"}
-                  fontSize="sm"
-                  fontWeight="600"
-                  letterSpacing="0.01em"
-                  textDecoration="none"
-                  _hover={{ color: "gold.300" }}
-                >
-                  <NextLink href={item.href}>{item.label}</NextLink>
-                </Link>
-              ))}
-            </HStack>
-
-            <CtaButton cta={settings.primaryCta} />
-          </HStack>
-
-          <Button
-            aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
-            bg="transparent"
-            color="ivory.100"
-            display={{ base: "inline-flex", lg: "none" }}
-            onClick={() => setMenuOpen((v) => !v)}
-            px="2"
-            _hover={{ bg: "transparent", color: "gold.300" }}
-          >
-            {menuOpen ? (
-              <LuX
-                style={{
-                  height: "24px",
-                  width: "24px",
-                }}
-              />
-            ) : (
-              <LuMenu
-                style={{
-                  height: "24px",
-                  width: "24px",
-                }}
-              />
-            )}
-          </Button>
-        </Flex>
-
-        {menuOpen && (
-          <Stack
-            borderTopWidth="1px"
-            borderColor="border"
-            display={{ base: "flex", lg: "none" }}
-            gap="1"
-            pb="6"
-            pt="4"
-          >
-            {navigationLinks.map((item) => (
-              <Link
-                key={item._key}
-                asChild
-                color={pathname === item.href ? "gold.300" : "ivory.50"}
-                fontFamily="heading"
-                fontSize="xl"
-                py="2"
-                textDecoration="none"
-                onClick={() => setMenuOpen(false)}
-              >
-                <NextLink href={item.href}>{item.label}</NextLink>
-              </Link>
-            ))}
-
-            <Box pt="4">
-              <CtaButton cta={settings.primaryCta} />
-            </Box>
-          </Stack>
-        )}
-      </Container>
-    </Box>
-  );
-}
+type Props = { settings: Settings };
 
 export function SiteFooter({ settings }: { settings: Settings }) {
   return (
