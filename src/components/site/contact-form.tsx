@@ -4,6 +4,7 @@ import { Button, Field, Input, Stack, Textarea } from "@chakra-ui/react";
 import { useState } from "react";
 import { LuArrowUpRight } from "react-icons/lu";
 import type { ContactPage } from "@/sanity/lib/types";
+import { TContactSchema } from "@/utils/schemas";
 
 export function ContactForm({
   copy,
@@ -12,27 +13,25 @@ export function ContactForm({
   copy: ContactPage["form"];
   recipient?: string;
 }) {
-  const [form, setForm] = useState({
+  const [form, setForm] = useState<TContactSchema>({
     email: "",
     message: "",
     name: "",
     subject: "",
+    phone: "",
   });
 
   function update(key: keyof typeof form, value: string) {
     setForm((current) => ({ ...current, [key]: value }));
   }
 
-  function submit(event: React.FormEvent<HTMLFormElement>) {
+  async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    const email = recipient ?? "";
-    const subject = encodeURIComponent(
-      `${form.subject || "Contato pelo site"} — ${form.name}`,
-    );
-    const body = encodeURIComponent(
-      `Nome: ${form.name}\nE-mail: ${form.email}\n\n${form.message}`,
-    );
-    window.location.href = `mailto:${email}?subject=${subject}&body=${body}`;
+
+    await fetch("/api/contact", {
+      method: "POST",
+      body: JSON.stringify(form),
+    });
   }
 
   return (
@@ -65,6 +64,20 @@ export function ContactForm({
             required
             type="email"
             value={form.email}
+          />
+        </Field.Root>
+        <Field.Root required>
+          <Field.Label color="ivory.100" fontWeight="700">
+            {copy?.phoneLabel ?? "Celular"}
+          </Field.Label>
+          <Input
+            bg="ink.700"
+            borderColor="border"
+            borderRadius="md"
+            name="phone"
+            onChange={(event) => update("phone", event.target.value)}
+            required
+            value={form.phone}
           />
         </Field.Root>
         <Field.Root required>

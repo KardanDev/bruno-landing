@@ -25,8 +25,6 @@ export default async function ContactPage() {
   const [page, settings] = await Promise.all([getContactPage(), getSettings()]);
 
   return (
-    <>
-      {/* <PageHero hero={page.hero} /> */}
 
       <Box as="section" py={{ base: "20", md: "28" }}>
         <Container maxW="8xl" px={{ base: "5", md: "8" }}>
@@ -119,6 +117,5 @@ export default async function ContactPage() {
           </SimpleGrid>
         </Container>
       </Box>
-    </>
   );
 }

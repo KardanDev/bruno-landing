@@ -213,6 +213,7 @@ export type ContactPage = {
     subjectLabel: string;
     messageLabel: string;
     submitLabel: string;
+    phoneLabel?: string;
   };
   contactNote?: string;
   facebookLink?: string;
