@@ -15,6 +15,7 @@ import React, { useMemo } from "react";
 import { Eyebrow } from "../blocks";
 import { CtaButton } from "../cta-button";
 import { HomePage } from "@/sanity/lib/types";
+import { CmsImage } from "../cms-image";
 
 type Props = {
   page: HomePage;
@@ -51,13 +52,16 @@ const HeroContent = ({ page }: Props) => {
           zIndex: 0,
         }}
       >
-        <ParallaxImage
+        <CmsImage
           alt={page.hero.image?.alt}
           fallbackLabel="MD"
           mode="cover"
+          width={3840}
+          height={2160}
+          fullWidth
           image={selectedImage}
-          useTransformProps={false}
         />
+        {/*0*/}
       </motion.div>
 
       <Box

@@ -2,8 +2,8 @@ import { Box, Text } from "@chakra-ui/react";
 import { SanityImage as ImageComponent } from "sanity-image";
 import { SanityImage } from "@/sanity/lib/types";
 import { CSSProperties } from "react";
-
-const baseSanityCdnUrl = `https://cdn.sanity.io/images/${process.env.NEXT_PUBLIC_SANITY_PROJECT_ID}/${process.env.NEXT_PUBLIC_SANITY_DATASET}/`;
+import Image from "next/image";
+import { urlFor } from "@/lib/imageUrl";
 
 type CmsImageProps = {
   image?: SanityImage;
@@ -13,8 +13,9 @@ type CmsImageProps = {
   width?: number;
   fallbackLabel?: string;
   priority?: boolean;
-  mode?: "cover" | "contain";
+  mode?: "cover" | "contain" | "fill";
   style?: CSSProperties;
+  fullWidth?: boolean;
 };
 
 export function CmsImage({
@@ -23,23 +24,33 @@ export function CmsImage({
   height,
   width,
   fallbackLabel = "MD",
-  sizes,
-  mode = "contain",
+  mode,
   style,
+  fullWidth,
 }: CmsImageProps) {
   if (image?.asset) {
     return (
-      <ImageComponent
-        id={image.asset?._ref ?? image.asset?._id}
-        baseUrl={baseSanityCdnUrl}
-        alt={image.alt ?? alt}
-        width={width}
-        height={height}
-        mode={mode}
-        hotspot={image.hotspot}
-        crop={image.crop}
-        sizes={sizes}
-        style={style}
+      <Image
+        src={urlFor(image)
+          .width(width ?? 600)
+          .height(height ?? 450)
+          .quality(100)
+          .url()}
+        alt={alt ?? image.alt ?? fallbackLabel}
+        width={width ?? 600}
+        height={height ?? 450}
+        objectFit={mode ?? "cover"}
+        objectPosition="top"
+        style={{
+          ...style,
+          ...(fullWidth && {
+            height: "100%",
+            width: "100%",
+            objectFit: "cover",
+            objectPosition: "top",
+          }),
+          ...(mode && { objectFit: mode }),
+        }}
       />
     );
   }

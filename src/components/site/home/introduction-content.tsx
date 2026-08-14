@@ -44,7 +44,6 @@ const IntroductionContent = ({ page }: Props) => {
       display="flex"
       alignItems="center"
     >
-      {/* Background image */}
       {selectedImage && (
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
@@ -64,26 +63,25 @@ const IntroductionContent = ({ page }: Props) => {
           <CmsImage
             image={selectedImage}
             alt={selectedImage?.alt || ""}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "fill",
-            }}
+            mode="fill"
+            width={2915}
+            height={1749}
+            fullWidth
           />
         </motion.div>
       )}
 
-      {selectedImage && (
+      {/*{selectedImage && (
         <Box
           position="absolute"
           inset={0}
           zIndex={1}
           bgGradient={{
             base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 45%, blackAlpha.300 100%)",
-            lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 40%, blackAlpha.200 75%, transparent 100%)",
+            lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 60%, blackAlpha.200 75%, transparent 100%)",
           }}
         />
-      )}
+      )}*/}
 
       {/* Content */}
       <Container

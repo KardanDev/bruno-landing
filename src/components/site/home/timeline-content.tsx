@@ -62,10 +62,12 @@ const TimelineContent = ({ page }: Props) => {
           <CmsImage
             image={selectedImage}
             alt={selectedImage?.alt || ""}
+            mode="fill"
+            width={1920}
+            height={868}
+            fullWidth
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "fill",
+              objectPosition: "center",
             }}
           />
         </motion.div>

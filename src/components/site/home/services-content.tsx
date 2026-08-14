@@ -62,25 +62,25 @@ const ServicesContent = ({ page }: Props) => {
           <CmsImage
             image={selectedImage}
             alt={selectedImage?.alt || ""}
-            mode="cover"
+            mode="fill"
+            width={1920}
+            height={2288}
+            fullWidth
             style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "fill",
+              objectPosition: "center",
             }}
           />
         </motion.div>
       )}
 
-      {/* Background overlay */}
       {selectedImage && (
         <Box
           position="absolute"
           inset={0}
           zIndex={1}
           bgGradient={{
-            base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 30%, blackAlpha.300 70%)",
-            lg: "linear(to-b, blackAlpha.800 0%, blackAlpha.600 25%, blackAlpha.200 50%, transparent 50%)",
+            base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 45%, blackAlpha.300 100%)",
+            lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 60%, blackAlpha.200 75%, transparent 100%)",
           }}
         />
       )}

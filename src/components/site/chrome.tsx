@@ -16,30 +16,16 @@ import {
 } from "@chakra-ui/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import NextLink from "next/link";
-import { useRef, useState } from "react";
-import { LuMenu, LuX } from "react-icons/lu";
 
 import type { Settings } from "@/sanity/lib/types";
-import { navigationLinks } from "@/utils/constants";
-import { CtaButton } from "./cta-button";
+
 import { CmsImage } from "./cms-image";
 import { BiPhone } from "react-icons/bi";
 import { GrMail } from "react-icons/gr";
 import { MdSend } from "react-icons/md";
 import { Tooltip } from "../ui/tooltip";
-import {
-  motion,
-  MotionValue,
-  useMotionValue,
-  useSpring,
-  useTransform,
-} from "motion/react";
-import { usePathname } from "next/navigation";
 
 gsap.registerPlugin(ScrollTrigger);
-
-type Props = { settings: Settings };
 
 export function SiteFooter({ settings }: { settings: Settings }) {
   return (
@@ -64,18 +50,25 @@ export function SiteFooter({ settings }: { settings: Settings }) {
                 md: "start",
               }}
             >
-              {settings?.siteLogo ? (
-                <CmsImage image={settings.siteLogo} width={400} height={400} />
-              ) : (
-                <Text
-                  fontFamily="heading"
-                  fontSize={{ base: "4xl", md: "5xl" }}
-                  fontWeight="400"
-                  lineHeight="0.95"
-                >
-                  {settings.siteName}
-                </Text>
-              )}
+              <Box w="full">
+                {settings?.siteLogo ? (
+                  <CmsImage
+                    image={settings.siteLogo}
+                    width={9772}
+                    height={2456}
+                    mode="contain"
+                  />
+                ) : (
+                  <Text
+                    fontFamily="heading"
+                    fontSize={{ base: "4xl", md: "5xl" }}
+                    fontWeight="400"
+                    lineHeight="0.95"
+                  >
+                    {settings.siteName}
+                  </Text>
+                )}
+              </Box>
 
               <Text color="ivory.200" fontSize="lg" lineHeight="1.7">
                 {settings.tagline}
