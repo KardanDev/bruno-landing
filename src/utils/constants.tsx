@@ -19,7 +19,7 @@ export const navigationLinks: TNavigationLink[] = [
   { _key: "nav-about", label: "Sobre", href: "/sobre" },
   { _key: "nav-services", label: "Atuação", href: "/servicos" },
   // { _key: "nav-pricing", label: "Honorários", href: "/honorarios" },
-  { _key: "nav-faq", label: "Dúvidas", href: "/duvidas" },
+  // { _key: "nav-faq", label: "Dúvidas", href: "/duvidas" },
   { _key: "nav-blog", label: "Artigos", href: "/artigos" },
   { _key: "nav-contact", label: "Contato", href: "/contato" },
 ];
