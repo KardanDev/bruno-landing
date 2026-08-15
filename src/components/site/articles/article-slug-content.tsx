@@ -25,23 +25,48 @@ function ArticleSlugContent({ settings, article }: ArticleSlugContentProps) {
     settings.defaultBackgroundMobile,
   );
 
+  const backgroundUrl = urlFor(defaultBackground)?.quality(100)?.url();
+
   return (
     <Box
       as="article"
+      position="relative"
+      overflow="hidden"
       py={{ base: "20", md: "28" }}
-      backgroundImage={`url(${urlFor(defaultBackground)?.quality(100)?.url()})`}
-      backgroundSize="cover"
-      backgroundRepeat="no-repeat"
-      backgroundPosition="40% 20%"
-      backgroundAttachment={{
-        base: "scroll",
-        md: "fixed",
-      }}
-      height={"100%"}
-      width={"100%"}
+      minH="100vh"
+      width="100%"
     >
-      {/*linear gradient for image=*/}
-      <Container maxW="4xl" px={{ base: "5", md: "8" }}>
+      {/* Background image */}
+      <Box
+        position="absolute"
+        inset={0}
+        zIndex={0}
+        backgroundImage={`url("${backgroundUrl}")`}
+        backgroundSize="cover"
+        backgroundRepeat="no-repeat"
+        backgroundPosition="40% 20%"
+        backgroundAttachment={{
+          base: "scroll",
+          md: "fixed",
+        }}
+      />
+
+      {/* Gradient */}
+      <Box
+        position="absolute"
+        inset={0}
+        zIndex={1}
+        background="linear-gradient(to right, rgba(0, 0, 0, 0.9) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0) 100%)"
+        pointerEvents="none"
+      />
+
+      {/* Content */}
+      <Container
+        position="relative"
+        zIndex={2}
+        maxW="4xl"
+        px={{ base: "5", md: "8" }}
+      >
         <Text
           color="ivory.200"
           fontSize="sm"
@@ -50,6 +75,7 @@ function ArticleSlugContent({ settings, article }: ArticleSlugContentProps) {
         >
           {formatDate(article.publishedAt)}
         </Text>
+
         <RichText value={article.body} />
       </Container>
     </Box>
