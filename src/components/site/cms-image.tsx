@@ -40,7 +40,6 @@ export function CmsImage({
         width={width ?? 600}
         height={height ?? 450}
         objectFit={mode ?? "cover"}
-        placeholder="blur"
         objectPosition="top"
         style={{
           ...style,
