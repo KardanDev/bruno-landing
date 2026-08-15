@@ -30,18 +30,18 @@ function ServiceSlugContent({ settings, service }: ServiceSlugContentProps) {
   );
 
   return (
-    <>
-      <Box
-        as="section"
-        bg="ink.950"
-        color="ivory.50"
-        py={{ base: "16", md: "24" }}
-        backgroundImage={`url(${urlFor(defaultBackground)?.quality(100)?.url()})`}
-        backgroundSize="cover"
-        backgroundRepeat="no-repeat"
-        backgroundPosition="40% 20%"
-        backgroundAttachment={"fixed"}
-      >
+    <Box
+      as={"section"}
+      backgroundImage={`url(${urlFor(defaultBackground)?.quality(100)?.url()})`}
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="40% 20%"
+      backgroundAttachment={"fixed"}
+      height={"100%"}
+      width={"100%"}
+      py={{ base: "16", md: "24" }}
+    >
+      <Box>
         <Container maxW="8xl" px={{ base: "5", md: "8" }}>
           <SimpleGrid
             alignItems="center"
@@ -121,7 +121,7 @@ function ServiceSlugContent({ settings, service }: ServiceSlugContentProps) {
         </Container>
       </Box>
       {service.faqs?.length ? (
-        <Box as="section" bg="surface" py={{ base: "20", md: "28" }}>
+        <Box as="section" py={{ base: "20", md: "28" }}>
           <Container maxW="6xl" px={{ base: "5", md: "8" }}>
             <Heading
               as="h2"
@@ -136,7 +136,7 @@ function ServiceSlugContent({ settings, service }: ServiceSlugContentProps) {
           </Container>
         </Box>
       ) : null}
-    </>
+    </Box>
   );
 }
 
