@@ -14,6 +14,7 @@ import { Eyebrow } from "../blocks";
 import { CtaButton } from "../cta-button";
 import { CmsImage } from "../cms-image";
 import { HomePage } from "@/sanity/lib/types";
+import { urlFor } from "@/lib/imageUrl";
 
 type Props = {
   page: HomePage;
@@ -43,8 +44,14 @@ const IntroductionContent = ({ page }: Props) => {
       minH={{ base: "auto", lg: "70vh" }}
       display="flex"
       alignItems="center"
+      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)
+        ?.url()})`}
+      backgroundSize='fill'
+      backgroundRepeat='no-repeat'
+      backgroundPosition='center'
+      backgroundAttachment={'fixed'}
     >
-      {selectedImage && (
+      {/*{selectedImage && (
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -63,13 +70,13 @@ const IntroductionContent = ({ page }: Props) => {
           <CmsImage
             image={selectedImage}
             alt={selectedImage?.alt || ""}
-            mode="fill"
+            mode="cover"
             width={2915}
             height={1749}
             fullWidth
           />
         </motion.div>
-      )}
+      )}*/}
 
       {/*{selectedImage && (
         <Box

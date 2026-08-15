@@ -13,6 +13,7 @@ import { SectionHeading, ServiceCard } from "../blocks";
 import { CtaButton } from "../cta-button";
 import { CmsImage } from "../cms-image";
 import { HomePage } from "@/sanity/lib/types";
+import { urlFor } from "@/lib/imageUrl";
 
 type Props = {
   page: HomePage;
@@ -41,9 +42,15 @@ const ServicesContent = ({ page }: Props) => {
       bg="ink.950"
       color="ivory.50"
       py={{ base: "20", md: "20" }}
+      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)
+        ?.url()})`}
+      backgroundSize='fill'
+      backgroundRepeat='no-repeat'
+      backgroundPosition='center'
+      backgroundAttachment={'fixed'}
     >
       {/* Background image */}
-      {selectedImage && (
+      {/*{selectedImage && (
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -62,18 +69,16 @@ const ServicesContent = ({ page }: Props) => {
           <CmsImage
             image={selectedImage}
             alt={selectedImage?.alt || ""}
-            mode="fill"
-            width={1920}
-            height={2288}
-            fullWidth
+            mode="contain"
+
             style={{
               objectPosition: "center",
             }}
           />
         </motion.div>
-      )}
+      )}*/}
 
-      {selectedImage && (
+      {/*{selectedImage && (
         <Box
           position="absolute"
           inset={0}
@@ -83,7 +88,7 @@ const ServicesContent = ({ page }: Props) => {
             lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 60%, blackAlpha.200 75%, transparent 100%)",
           }}
         />
-      )}
+      )}*/}
 
       <Container
         position="relative"

@@ -40,14 +40,16 @@ export function CmsImage({
         width={width ?? 600}
         height={height ?? 450}
         objectFit={mode ?? "cover"}
-        objectPosition="top"
+        objectPosition="center"
+
         style={{
           ...style,
           ...(fullWidth && {
             height: "100%",
             width: "100%",
-            objectFit: "cover",
-            objectPosition: "top",
+            objectFit: mode ?? 'cover',
+            objectPosition: "center",
+            aspectRatio: '3 / 4'
           }),
           ...(mode && { objectFit: mode }),
         }}

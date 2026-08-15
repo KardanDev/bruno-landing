@@ -42,8 +42,14 @@ const TimelineContent = ({ page }: Props) => {
       bg="ink.950"
       color="ivory.50"
       py={{ base: "20", md: "28" }}
+      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)
+        ?.url()})`}
+      backgroundSize='fill'
+      backgroundRepeat='no-repeat'
+      backgroundPosition='center'
+      backgroundAttachment={'fixed'}
     >
-      {selectedImage && (
+      {/*{selectedImage && (
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -71,10 +77,10 @@ const TimelineContent = ({ page }: Props) => {
             }}
           />
         </motion.div>
-      )}
+      )}*/}
 
       {/* Background overlay */}
-      {selectedImage && (
+      {/*{selectedImage && (
         <Box
           position="absolute"
           inset={0}
@@ -84,7 +90,7 @@ const TimelineContent = ({ page }: Props) => {
             lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 40%, blackAlpha.200 75%, transparent 100%)",
           }}
         />
-      )}
+      )}*/}
 
       {/* Existing content */}
       <Container
