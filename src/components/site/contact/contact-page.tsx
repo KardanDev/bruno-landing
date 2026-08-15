@@ -100,14 +100,7 @@ const ContactPage = ({ page, settings }: ContactPageProps) => {
             </HStack>
             {settings.address ? (
               settings.mapUrl ? (
-                <Link
-                  color="ivory.300"
-                  href={settings.mapUrl}
-                  lineHeight="1.75"
-                  target="_blank"
-                  whiteSpace="pre-line"
-                  _hover={{ color: "gold.400" }}
-                >
+                <Link color="ivory.300" href={settings.mapUrl} target="_blank">
                   {settings.address}
                 </Link>
               ) : (

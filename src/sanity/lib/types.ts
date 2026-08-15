@@ -77,6 +77,8 @@ export type Settings = {
   monogram?: string;
   primaryCta: Cta;
   navigation: NavigationItem[];
+  defaultBackground?: SanityImage;
+  defaultBackgroundMobile?: SanityImage;
   phone?: string;
   email?: string;
   address?: string;

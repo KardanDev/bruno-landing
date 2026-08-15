@@ -26,6 +26,8 @@ export const SETTINGS_QUERY = defineQuery(`
     monogram,
     primaryCta{${CTA_FIELDS}},
     navigation[]{_key, label, href},
+    defaultBackground,
+    defaultBackgroundMobile,
     phone,
     email,
     address,
