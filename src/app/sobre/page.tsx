@@ -1,13 +1,6 @@
-import { Box, Container, SimpleGrid, Stack, Text } from "@chakra-ui/react";
 import type { Metadata } from "next";
-import {
-  ClosingCta,
-  Eyebrow,
-  PageHero,
-  SectionHeading,
-} from "@/components/site/blocks";
-import { CmsImage } from "@/components/site/cms-image";
-import { RichText } from "@/components/site/rich-text";
+import { ClosingCta, PageHero } from "@/components/site/blocks";
+
 import { getAboutPage, getSettings } from "@/sanity/lib/content";
 import { createMetadata } from "@/sanity/lib/metadata";
 import AboutContent from "@/components/site/about/about-content";

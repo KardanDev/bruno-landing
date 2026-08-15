@@ -99,7 +99,7 @@ export const ABOUT_PAGE_QUERY = defineQuery(`
 `);
 
 export const SERVICES_PAGE_QUERY = defineQuery(`
-  *[_id == "servicesPage"][0]{hero{${HERO_FIELDS}}, closingCta{${HERO_FIELDS}}, ${SEO_FIELDS}}
+  *[_id == "servicesPage"][0]{hero{${HERO_FIELDS}}, servicesBanner{${IMAGE_FIELDS}}, servicesBannerMobile{${IMAGE_FIELDS}}, closingCta{${HERO_FIELDS}}, ${SEO_FIELDS}}
 `);
 
 export const BLOG_PAGE_QUERY = defineQuery(`

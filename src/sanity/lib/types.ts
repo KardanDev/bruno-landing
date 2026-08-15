@@ -173,6 +173,8 @@ export type AboutPage = {
 
 export type ServicesPage = {
   hero: PageHero;
+  servicesBanner?: SanityImage;
+  servicesBannerMobile?: SanityImage;
   closingCta?: PageHero;
   seo?: Seo;
 };
