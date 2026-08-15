@@ -167,7 +167,15 @@ export function PageHero({ hero }: { hero: PageHero }) {
       backgroundPosition="40% 20%"
       backgroundAttachment={"fixed"}
     >
-      <Container maxW="8xl" px={{ base: "5", md: "8" }} position="relative">
+      <Container
+        maxW="8xl"
+        px={{ base: "5", md: "8" }}
+        position="relative"
+        mt={{
+          base: 64,
+          md: "none",
+        }}
+      >
         <SimpleGrid
           alignItems="center"
           columns={{ base: 1, lg: hero.image ? 2 : 1 }}

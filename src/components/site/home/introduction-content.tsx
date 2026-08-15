@@ -40,7 +40,7 @@ const IntroductionContent = ({ page }: Props) => {
       backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
-      backgroundPosition="40% 20%"
+      backgroundPosition="90% 80%"
       backgroundAttachment={"fixed"}
     >
       <Container

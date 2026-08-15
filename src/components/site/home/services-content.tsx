@@ -45,7 +45,7 @@ const ServicesContent = ({ page }: Props) => {
       backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
-      backgroundPosition="80% 85%"
+      backgroundPosition="90% 70%"
       backgroundAttachment={"fixed"}
     >
       <Container

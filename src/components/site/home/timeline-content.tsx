@@ -46,7 +46,7 @@ const TimelineContent = ({ page }: Props) => {
       backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
-      backgroundPosition="40% 20%"
+      backgroundPosition="center bottom"
       backgroundAttachment={"fixed"}
     >
       {/*{selectedImage && (

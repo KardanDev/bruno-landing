@@ -20,7 +20,7 @@ const ArticlesContent = ({ page }: Props) => {
       backgroundImage={`url(${urlFor(page.articlesBanner)?.quality(100)?.url()})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
-      backgroundPosition="40% 20%"
+      backgroundPosition="center bottom"
       backgroundAttachment={"fixed"}
     >
       <Container maxW="8xl" px={{ base: "5", md: "8" }}>
