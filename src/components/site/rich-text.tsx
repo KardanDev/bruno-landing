@@ -13,61 +13,55 @@ const components: PortableTextComponents = {
       <Text
         color="ivory.200"
         fontSize={{ base: "lg", md: "xl" }}
-        lineHeight="1.85"
+        lineHeight="1.8"
         mb="6"
-        textAlign={{
-          base: "center",
-          md: "start",
-        }}
+        textAlign="start"
       >
         {children}
       </Text>
     ),
+
     h2: ({ children }) => (
       <Heading
         as="h2"
         color="ivory.200"
         fontFamily="heading"
-        fontSize={{ base: "3xl", md: "4xl" }}
+        fontSize={{ base: "2xl", md: "3xl" }}
         fontWeight="400"
-        lineHeight="1.1"
+        lineHeight="1.2"
         mb="5"
-        mt="12"
-        textAlign={{
-          base: "center",
-          md: "start",
-        }}
+        mt="10"
+        textAlign="start"
       >
         {children}
       </Heading>
     ),
+
     h3: ({ children }) => (
       <Heading
         as="h3"
         color="ivory.200"
         fontFamily="heading"
-        fontSize={{ base: "2xl", md: "3xl" }}
+        fontSize={{ base: "xl", md: "2xl" }}
         fontWeight="400"
-        lineHeight="1.2"
+        lineHeight="1.3"
         mb="4"
-        mt="10"
-        textAlign={{
-          base: "center",
-          md: "start",
-        }}
+        mt="8"
+        textAlign="start"
       >
         {children}
       </Heading>
     ),
+
     blockquote: ({ children }) => (
       <Box
         borderLeftWidth="2px"
         borderColor="gold.400"
         color="ivory.200"
         fontFamily="heading"
-        fontSize={{ base: "2xl", md: "3xl" }}
+        fontSize={{ base: "xl", md: "2xl" }}
         fontStyle="italic"
-        lineHeight="1.3"
+        lineHeight="1.5"
         mb="8"
         mt="8"
         pl="6"
@@ -76,12 +70,13 @@ const components: PortableTextComponents = {
       </Box>
     ),
   },
+
   list: {
     bullet: ({ children }) => (
       <Box
         as="ul"
         color="ivory.200"
-        fontSize="lg"
+        fontSize={{ base: "lg", md: "xl" }}
         lineHeight="1.8"
         mb="6"
         pl="6"
@@ -89,11 +84,12 @@ const components: PortableTextComponents = {
         {children}
       </Box>
     ),
+
     number: ({ children }) => (
       <Box
         as="ol"
         color="ivory.200"
-        fontSize="lg"
+        fontSize={{ base: "lg", md: "xl" }}
         lineHeight="1.8"
         mb="6"
         pl="6"
@@ -102,14 +98,20 @@ const components: PortableTextComponents = {
       </Box>
     ),
   },
+
   listItem: ({ children }) => (
     <Box as="li" mb="2">
       {children}
     </Box>
   ),
+
   marks: {
     link: ({ children, value }) => {
-      const link = value as { href?: string; openInNewTab?: boolean };
+      const link = value as {
+        href?: string;
+        openInNewTab?: boolean;
+      };
+
       return (
         <Link
           color="ivory.200"
@@ -117,22 +119,35 @@ const components: PortableTextComponents = {
           rel={link.openInNewTab ? "noreferrer" : undefined}
           target={link.openInNewTab ? "_blank" : undefined}
           textDecoration="underline"
+          textUnderlineOffset="3px"
         >
           {children}
         </Link>
       );
     },
   },
+
   types: {
     inlineImage: ({ value }) => {
-      const inlineImage = value as { image?: SanityImage; caption?: string };
+      const inlineImage = value as {
+        image?: SanityImage;
+        caption?: string;
+      };
+
       return (
         <Box as="figure" my="10">
           <Box borderRadius="editorial" overflow="hidden">
             <CmsImage alt={inlineImage.image?.alt} image={inlineImage.image} />
           </Box>
+
           {inlineImage.caption ? (
-            <Text as="figcaption" color="ivory.200" fontSize="sm" mt="3">
+            <Text
+              as="figcaption"
+              color="ivory.200"
+              fontSize="sm"
+              mt="3"
+              opacity={0.7}
+            >
               {inlineImage.caption}
             </Text>
           ) : null}
@@ -145,5 +160,17 @@ const components: PortableTextComponents = {
 export function RichText({ value }: { value?: PortableTextBlock[] }) {
   if (!value?.length) return null;
 
-  return <PortableText components={components} value={value} />;
+  return (
+    <Box
+      width="100%"
+      display="block"
+      sx={{
+        "& > *": {
+          gridColumn: "1 / -1",
+        },
+      }}
+    >
+      <PortableText components={components} value={value} />
+    </Box>
+  );
 }

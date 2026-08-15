@@ -8,10 +8,9 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import { motion, useReducedMotion } from "motion/react";
-import React, { useMemo } from "react";
+import { useMemo } from "react";
 import { SectionHeading, ServiceCard } from "../blocks";
 import { CtaButton } from "../cta-button";
-import { CmsImage } from "../cms-image";
 import { HomePage } from "@/sanity/lib/types";
 import { urlFor } from "@/lib/imageUrl";
 
