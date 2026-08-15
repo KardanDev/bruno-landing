@@ -76,7 +76,7 @@ const HeroContent = ({ page }: Props) => {
             lg: "2xl",
             xl: "3xl",
           }}
-          align="center"
+          align="start"
         >
           {page.hero.eyebrow && (
             <Reveal delay={0.04} y={16} scale={0.98}>
