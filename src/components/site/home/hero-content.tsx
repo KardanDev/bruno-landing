@@ -31,6 +31,7 @@ const HeroContent = ({ page }: Props) => {
 
   const selectedImage = useMemo(() => {
     if (isMobile && page.hero.imageMobile) {
+      console.log("hero mobile");
       return page.hero.imageMobile;
     }
     return page.hero.image;
@@ -48,7 +49,10 @@ const HeroContent = ({ page }: Props) => {
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
       backgroundPosition="40% 20%"
-      backgroundAttachment={"fixed"}
+      backgroundAttachment={{
+        base: "scroll",
+        md: "fixed",
+      }}
     >
       {/*<Box
         position="absolute"
@@ -69,6 +73,9 @@ const HeroContent = ({ page }: Props) => {
         minH="100vh"
         px={{ base: 3, md: 12, xl: 20 }}
         py={{ base: 24, lg: 44 }}
+        mt={{
+          base: 10,
+        }}
       >
         <Stack
           gap="2"
@@ -76,7 +83,10 @@ const HeroContent = ({ page }: Props) => {
             lg: "2xl",
             xl: "3xl",
           }}
-          align="start"
+          align={{
+            base: "center",
+            md: "start",
+          }}
         >
           {page.hero.eyebrow && (
             <Reveal delay={0.04} y={16} scale={0.98}>
