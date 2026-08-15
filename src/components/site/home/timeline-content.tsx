@@ -130,7 +130,7 @@ const TimelineContent = ({ page }: Props) => {
                   pt="5"
                   textAlign={{
                     base: "center",
-                    md: "flex-start",
+                    md: "start",
                   }}
                 >
                   <Text

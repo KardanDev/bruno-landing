@@ -137,7 +137,7 @@ export function SiteFooter({ settings }: { settings: Settings }) {
                 <Text
                   whiteSpace="pre-line"
                   maxW="lg"
-                  textAlign={{ base: "center", md: "flex-start" }}
+                  textAlign={{ base: "center", md: "start" }}
                 >
                   {settings.address}
                 </Text>

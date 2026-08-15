@@ -364,7 +364,7 @@ export function ServiceCard({
                   letterSpacing="-0.035em"
                   textAlign={{
                     base: "center",
-                    md: "flex-start",
+                    md: "start",
                   }}
                 >
                   {service.title}
@@ -383,7 +383,7 @@ export function ServiceCard({
                   lineHeight="1.7"
                   textAlign={{
                     base: "center",
-                    md: "flex-start",
+                    md: "start",
                   }}
                 >
                   {service.summary}
