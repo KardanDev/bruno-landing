@@ -27,6 +27,8 @@ import { CmsImage } from "./cms-image";
 import { CtaButton } from "./cta-button";
 import React from "react";
 import { MotionWrapper } from "@/utils/animations";
+import useResponsiveImage from "@/hooks/use-responsive-image";
+import { urlFor } from "@/lib/imageUrl";
 
 function useParallax(distance = 80) {
   const ref = React.useRef<HTMLDivElement | null>(null);
@@ -133,7 +135,8 @@ export function SectionHeading({
 export function PageHero({ hero }: { hero: PageHero }) {
   const reduceMotion = useReducedMotion();
   const heroParallax = useParallax(140);
-  const glowParallax = useParallax(60);
+
+  const selectedImage = useResponsiveImage(hero.image, hero.imageMobile);
 
   return (
     <Box
@@ -142,65 +145,13 @@ export function PageHero({ hero }: { hero: PageHero }) {
       color="ivory.50"
       overflow="hidden"
       position="relative"
-      py={{ base: "16", md: "24" }}
+      py={{ base: "16", md: "36" }}
+      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="40% 20%"
+      backgroundAttachment={"fixed"}
     >
-      <motion.div
-        aria-hidden
-        initial={
-          reduceMotion
-            ? false
-            : { opacity: 0, scale: 0.7, x: 80, y: -40, rotate: -12 }
-        }
-        animate={
-          reduceMotion
-            ? undefined
-            : { opacity: 1, scale: 1, x: 0, y: 0, rotate: 0 }
-        }
-        transition={{ type: "spring", stiffness: 55, damping: 14, mass: 1.1 }}
-        style={{
-          position: "absolute",
-          right: 0,
-          top: 0,
-          width: "100%",
-          height: "100%",
-          pointerEvents: "none",
-        }}
-      >
-        <motion.div
-          ref={glowParallax.ref}
-          style={{
-            y: reduceMotion ? 0 : glowParallax.y,
-            rotate: reduceMotion ? 0 : glowParallax.rotate,
-            scale: reduceMotion ? 1 : glowParallax.scale,
-            position: "absolute",
-            inset: 0,
-          }}
-        >
-          <Box
-            bg="wine.800"
-            borderRadius="full"
-            filter="blur(18px)"
-            h={{ base: "72", md: "120" }}
-            opacity="0.75"
-            position="absolute"
-            right={{ base: "-44", md: "-10" }}
-            top={{ base: "-20", md: "-28" }}
-            w={{ base: "72", md: "120" }}
-          />
-          <Box
-            bg="gold.300"
-            borderRadius="full"
-            filter="blur(28px)"
-            h={{ base: "36", md: "64" }}
-            opacity="0.18"
-            position="absolute"
-            right={{ base: "8", md: "12" }}
-            top={{ base: "20", md: "24" }}
-            w={{ base: "36", md: "64" }}
-          />
-        </motion.div>
-      </motion.div>
-
       <Container maxW="8xl" px={{ base: "5", md: "8" }} position="relative">
         <SimpleGrid
           alignItems="center"
@@ -579,13 +530,29 @@ export function ArticleCard({ post }: { post: Post }) {
   );
 }
 
-export function ClosingCta({ hero }: { hero?: PageHero }) {
+export function ClosingCta({
+  hero,
+  inverse = true,
+}: {
+  hero?: PageHero;
+  inverse?: boolean;
+}) {
   const reduceMotion = useReducedMotion();
+  const selectedImage = useResponsiveImage(hero?.image, hero?.imageMobile);
 
   if (!hero) return null;
 
   return (
-    <Box as="section" color="ink.900" py={{ base: "16", md: "24" }}>
+    <Box
+      as="section"
+      color="ink.900"
+      py={{ base: "16", md: "24" }}
+      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="40% 20%"
+      backgroundAttachment={"fixed"}
+    >
       <Container maxW="8xl" px={{ base: "5", md: "8" }}>
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 48, scale: 0.96 }}
@@ -605,6 +572,7 @@ export function ClosingCta({ hero }: { hero?: PageHero }) {
               description={hero.description}
               eyebrow={hero.eyebrow}
               title={hero.title}
+              inverse={inverse}
             />
             {hero.cta ? (
               <Box flexShrink="0">

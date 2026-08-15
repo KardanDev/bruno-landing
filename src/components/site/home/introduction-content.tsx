@@ -15,6 +15,7 @@ import { CtaButton } from "../cta-button";
 import { CmsImage } from "../cms-image";
 import { HomePage } from "@/sanity/lib/types";
 import { urlFor } from "@/lib/imageUrl";
+import useResponsiveImage from "@/hooks/use-responsive-image";
 
 type Props = {
   page: HomePage;
@@ -22,18 +23,10 @@ type Props = {
 
 const IntroductionContent = ({ page }: Props) => {
   const reduceMotion = useReducedMotion();
-
-  const isMobile = useBreakpointValue({
-    base: true,
-    md: false,
-  });
-
-  const selectedImage = useMemo(() => {
-    if (isMobile && page.introductionBannerMobile) {
-      return page.introductionBannerMobile;
-    }
-    return page.introductionBanner;
-  }, [isMobile, page.introductionBanner, page.introductionBannerMobile]);
+  const selectedImage = useResponsiveImage(
+    page.introductionBanner,
+    page.introductionBannerMobile,
+  );
 
   return (
     <Box
@@ -50,46 +43,6 @@ const IntroductionContent = ({ page }: Props) => {
       backgroundPosition="40% 20%"
       backgroundAttachment={"fixed"}
     >
-      {/*{selectedImage && (
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
-          animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
-          transition={{
-            duration: 1.2,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 0,
-          }}
-        >
-          <CmsImage
-            image={selectedImage}
-            alt={selectedImage?.alt || ""}
-            mode="cover"
-            width={2915}
-            height={1749}
-            fullWidth
-          />
-        </motion.div>
-      )}*/}
-
-      {/*{selectedImage && (
-        <Box
-          position="absolute"
-          inset={0}
-          zIndex={1}
-          bgGradient={{
-            base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 45%, blackAlpha.300 100%)",
-            lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 60%, blackAlpha.200 75%, transparent 100%)",
-          }}
-        />
-      )}*/}
-
-      {/* Content */}
       <Container
         position="relative"
         zIndex={2}
