@@ -15,6 +15,7 @@ import { AnimatedReveal } from "../animated-reveal";
 import { SectionHeading } from "../blocks";
 import { CmsImage } from "../cms-image";
 import { HomePage } from "@/sanity/lib/types";
+import { urlFor } from "@/lib/imageUrl";
 
 type Props = {
   page: HomePage;
