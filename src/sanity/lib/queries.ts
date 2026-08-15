@@ -82,10 +82,14 @@ export const HOME_PAGE_QUERY = defineQuery(`
 export const ABOUT_PAGE_QUERY = defineQuery(`
   *[_id == "aboutPage"][0]{
     hero{${HERO_FIELDS}},
+    storyBanner{${IMAGE_FIELDS}},
+    storyBannerMobile{${IMAGE_FIELDS}},
     storyEyebrow,
     storyTitle,
     story,
     portrait{${IMAGE_FIELDS}},
+    valuesBanner{${IMAGE_FIELDS}},
+    valuesBannerMobile{${IMAGE_FIELDS}},
     valuesTitle,
     values[]{_key, title, description},
     stats[]{_key, value, label},

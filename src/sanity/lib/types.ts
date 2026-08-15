@@ -157,9 +157,13 @@ export type HomePage = {
 export type AboutPage = {
   hero: PageHero;
   storyEyebrow?: string;
+  storyBanner?: SanityImage;
+  storyBannerMobile?: SanityImage;
   storyTitle: string;
   story: PortableTextBlock[];
   portrait?: SanityImage;
+  valuesBanner?: SanityImage;
+  valuesBannerMobile?: SanityImage;
   valuesTitle: string;
   values: ValueItem[];
   stats: Stat[];
