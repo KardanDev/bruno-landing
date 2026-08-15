@@ -85,6 +85,7 @@ export type Settings = {
   mapUrl?: string;
   officeHours?: string;
   socialLinks?: NavigationItem[];
+  newsletterLabel?: string;
   seo?: Seo;
 };
 
@@ -185,6 +186,7 @@ export type BlogPage = {
   hero: PageHero;
   articlesBanner?: SanityImage;
   articlesBannerMobile?: SanityImage;
+  closingCta?: PageHero;
   seo?: Seo;
 };
 

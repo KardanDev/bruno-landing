@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHero } from "@/components/site/blocks";
-import { getPost, getSettings } from "@/sanity/lib/content";
+import { ClosingCta, PageHero } from "@/components/site/blocks";
+import { getBlogPage, getPost, getSettings } from "@/sanity/lib/content";
 import { createMetadata } from "@/sanity/lib/metadata";
 import ArticleSlugContent from "@/components/site/articles/article-slug-content";
 import { ViewTransition } from "react";
@@ -24,6 +24,7 @@ export default async function ArticleDetailPage({
   const { slug } = await params;
   const post = await getPost(slug);
   const settings = await getSettings();
+  const articlesPage = await getBlogPage();
   if (!post) notFound();
 
   return (
@@ -36,6 +37,7 @@ export default async function ArticleDetailPage({
         }}
       />
       <ArticleSlugContent settings={settings} article={post} />
+      <ClosingCta hero={articlesPage.closingCta} />
     </ViewTransition>
   );
 }

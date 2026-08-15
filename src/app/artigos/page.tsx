@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { PageHero } from "@/components/site/blocks";
+import { ClosingCta, PageHero } from "@/components/site/blocks";
 import { getBlogPage, getPosts, getSettings } from "@/sanity/lib/content";
 import { createMetadata } from "@/sanity/lib/metadata";
 import ArticlesContent from "@/components/site/articles/articles-content";
@@ -17,6 +17,7 @@ export default async function ArticlesPage() {
     <ViewTransition name="articles">
       <PageHero hero={page.hero} />
       <ArticlesContent page={page} articles={posts} />
+      <ClosingCta hero={page.closingCta} />
     </ViewTransition>
   );
 }

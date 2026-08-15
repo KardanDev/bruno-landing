@@ -33,6 +33,7 @@ export const SETTINGS_QUERY = defineQuery(`
     address,
     mapUrl,
     officeHours,
+    newsletterLabel,
     socialLinks[]{_key, label, href},
     ${SEO_FIELDS}
   }
@@ -105,7 +106,7 @@ export const SERVICES_PAGE_QUERY = defineQuery(`
 `);
 
 export const BLOG_PAGE_QUERY = defineQuery(`
-  *[_id == "blogPage"][0]{hero{${HERO_FIELDS}}, articlesBanner{${IMAGE_FIELDS}}, articlesBannerMobile{${IMAGE_FIELDS}}, ${SEO_FIELDS}}
+  *[_id == "blogPage"][0]{hero{${HERO_FIELDS}}, articlesBanner{${IMAGE_FIELDS}}, articlesBannerMobile{${IMAGE_FIELDS}}, closingCta{${HERO_FIELDS}}, ${SEO_FIELDS}}
 `);
 
 export const PRICING_PAGE_QUERY = defineQuery(`

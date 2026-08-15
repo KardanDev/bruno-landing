@@ -99,18 +99,6 @@ function ServiceSlugContent({ settings, service }: ServiceSlugContentProps) {
       <Box as="section" py={{ base: "20", md: "28" }}>
         <Container maxW="6xl" px={{ base: "5", md: "8" }}>
           <RichText value={service.body} />
-          {/*<Box bg="surface" borderRadius="editorial" p={{ base: "7", md: "9" }}>
-            <Heading
-              as="h2"
-              fontFamily="heading"
-              fontSize="3xl"
-              fontWeight="400"
-              mb="6"
-            >
-              O que está incluído
-            </Heading>
-            <FeatureList items={service.features} />
-          </Box>*/}
         </Container>
       </Box>
       {service.faqs?.length ? (

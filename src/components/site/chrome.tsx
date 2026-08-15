@@ -90,7 +90,7 @@ export function SiteFooter({ settings }: { settings: Settings }) {
               alignItems="start"
             >
               <Text as="h1" fontSize={"xl"}>
-                Sign up to our newsletter!
+                {settings.newsletterLabel}
               </Text>
               <form style={{ width: "100%" }}>
                 <HStack>
@@ -100,12 +100,12 @@ export function SiteFooter({ settings }: { settings: Settings }) {
                     bg="ink.700"
                     borderColor={"border"}
                     color="ivory.300"
-                    placeholder="Your email address"
+                    placeholder="Email"
                     _placeholder={{
                       color: "ivory.300",
                     }}
                   />
-                  <Tooltip content="Submit email to newsletter" showArrow>
+                  <Tooltip content="Cadastrar-se" showArrow>
                     <IconButton
                       variant="subtle"
                       bg="ink.700"
