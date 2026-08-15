@@ -181,6 +181,8 @@ export type ServicesPage = {
 
 export type BlogPage = {
   hero: PageHero;
+  articlesBanner?: SanityImage;
+  articlesBannerMobile?: SanityImage;
   seo?: Seo;
 };
 
