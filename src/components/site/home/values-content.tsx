@@ -27,7 +27,7 @@ const ValuesContent = ({ page }: Props) => {
       backgroundImage={`url(${urlFor(page.valuesBanner)?.quality(100)?.url()})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
-      backgroundPosition="0% 0%"
+      backgroundPosition="40% 20%"
       backgroundAttachment={"fixed"}
     >
       <Container maxW="8xl" px={{ base: "5", md: "8" }}>
@@ -45,7 +45,16 @@ const ValuesContent = ({ page }: Props) => {
                 }
                 transition={{ type: "spring", stiffness: 240, damping: 18 }}
               >
-                <Stack borderTopWidth="1px" borderColor="border" gap="4" pt="5">
+                <Stack
+                  borderTopWidth="1px"
+                  borderColor="border"
+                  gap="4"
+                  pt="5"
+                  textAlign={{
+                    base: "center",
+                    md: "flex-start",
+                  }}
+                >
                   <Heading
                     as="h2"
                     fontFamily="heading"

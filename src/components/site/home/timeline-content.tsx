@@ -46,7 +46,7 @@ const TimelineContent = ({ page }: Props) => {
       backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
-      backgroundPosition="center"
+      backgroundPosition="40% 20%"
       backgroundAttachment={"fixed"}
     >
       {/*{selectedImage && (
@@ -128,6 +128,10 @@ const TimelineContent = ({ page }: Props) => {
                   borderColor="gold.300"
                   gap="5"
                   pt="5"
+                  textAlign={{
+                    base: "center",
+                    md: "flex-start",
+                  }}
                 >
                   <Text
                     color="gold.300"

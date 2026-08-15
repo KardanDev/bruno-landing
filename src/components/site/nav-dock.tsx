@@ -108,7 +108,10 @@ function DockItem({
       bg={active ? "whiteAlpha.100" : "transparent"}
       transition="color 0.2s, background-color 0.2s"
       _hover={{ color: "gold.300", bg: "whiteAlpha.100" }}
-      minW={`${DOCK_ICON_SIZE}px`} // minimum width
+      minW={{
+        base: "full",
+        md: `${DOCK_ICON_SIZE}px`,
+      }} // minimum width
     >
       <HStack gap="2" w="max-content">
         <IconComponent size={18} strokeWidth={2} />
@@ -193,7 +196,10 @@ function NavDock({ settings }: Props) {
       pointerEvents="none"
       w="full"
       minW="fit-content" // changed from "2xl"
-      maxW="calc(100vw - 48px)" // prevent overflow
+      maxW={{
+        base: "full",
+        md: "calc(100vw - 48px)",
+      }} // prevent overflow
     >
       <Container px={{ base: "4", md: "6" }} pointerEvents="none">
         <Flex

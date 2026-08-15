@@ -70,7 +70,15 @@ export function SiteFooter({ settings }: { settings: Settings }) {
                 )}
               </Box>
 
-              <Text color="ivory.200" fontSize="lg" lineHeight="1.7">
+              <Text
+                color="ivory.200"
+                fontSize="lg"
+                lineHeight="1.7"
+                hidden={{
+                  base: true,
+                  md: false,
+                }}
+              >
                 {settings.tagline}
               </Text>
             </Stack>
@@ -126,18 +134,28 @@ export function SiteFooter({ settings }: { settings: Settings }) {
           >
             <Stack color="ivory.200" fontSize="sm" gap="2">
               {settings.address && (
-                <Text whiteSpace="pre-line" maxW="lg">
+                <Text
+                  whiteSpace="pre-line"
+                  maxW="lg"
+                  textAlign={{ base: "center", md: "flex-start" }}
+                >
                   {settings.address}
                 </Text>
               )}
               {settings.phone && (
-                <HStack>
+                <HStack
+                  align={{ base: "center", md: "flex-start" }}
+                  mx={{ base: "auto", md: "0" }}
+                >
                   <BiPhone />
                   <Text>{settings.phone}</Text>
                 </HStack>
               )}
               {settings.email && (
-                <HStack>
+                <HStack
+                  align={{ base: "center", md: "flex-start" }}
+                  mx={{ base: "auto", md: "0" }}
+                >
                   <GrMail />
                   <Text>{settings.email}</Text>
                 </HStack>
@@ -145,7 +163,7 @@ export function SiteFooter({ settings }: { settings: Settings }) {
               {settings.officeHours && <Text>{settings.officeHours}</Text>}
             </Stack>
 
-            <Stack align={{ base: "flex-start", md: "flex-end" }} gap="3">
+            <Stack align={{ base: "center", md: "flex-end" }} gap="3">
               <HStack flexWrap="wrap" gap="5">
                 {(settings.socialLinks ?? []).map((item) => (
                   <Link
@@ -160,7 +178,11 @@ export function SiteFooter({ settings }: { settings: Settings }) {
                 ))}
               </HStack>
 
-              <Text color="ink.500" fontSize="sm">
+              <Text
+                color="ink.500"
+                fontSize="sm"
+                textAlign={{ base: "center", md: "flex-start" }}
+              >
                 © {new Date().getFullYear()} {settings.siteName}. Todos os
                 direitos reservados.
               </Text>

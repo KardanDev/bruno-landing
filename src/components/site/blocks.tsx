@@ -56,7 +56,10 @@ export function Eyebrow({
   return (
     <Text
       color={color}
-      fontSize="xs"
+      fontSize={{
+        base: "xx-small",
+        md: "xs",
+      }}
       fontWeight="700"
       letterSpacing="0.16em"
       textTransform="uppercase"
@@ -263,12 +266,26 @@ export function ServiceCard({
         py={{ base: "7", md: "9" }}
       >
         <Flex
-          align={{ base: "flex-start", md: "center" }}
+          align={{ base: "center", md: "center" }}
           direction={{ base: "column", md: "row" }}
           gap="6"
           justify="space-between"
         >
-          <HStack align="flex-start" gap={{ base: "5", md: "8" }} maxW="3xl">
+          <Stack
+            align={{
+              base: "center",
+              md: "flex-start",
+            }}
+            direction={{
+              base: "column",
+              md: "row",
+            }}
+            gap={{ base: "5", md: "8" }}
+            maxW={{
+              base: "full",
+              md: "3xl",
+            }}
+          >
             <motion.div
               initial={
                 reduceMotion ? false : { opacity: 0, x: -20, rotate: -8 }
@@ -329,6 +346,10 @@ export function ServiceCard({
                   fontSize={{ base: "3xl", md: "4xl" }}
                   fontWeight="400"
                   letterSpacing="-0.035em"
+                  textAlign={{
+                    base: "center",
+                    md: "flex-start",
+                  }}
                 >
                   {service.title}
                 </Heading>
@@ -340,12 +361,20 @@ export function ServiceCard({
                 viewport={{ once: true, amount: 0.2 }}
                 transition={{ duration: 0.55, delay: index * 0.08 + 0.16 }}
               >
-                <Text color="ivory.300" fontSize="lg" lineHeight="1.7">
+                <Text
+                  color="ivory.300"
+                  fontSize="lg"
+                  lineHeight="1.7"
+                  textAlign={{
+                    base: "center",
+                    md: "flex-start",
+                  }}
+                >
                   {service.summary}
                 </Text>
               </motion.div>
             </Stack>
-          </HStack>
+          </Stack>
 
           <Link
             aria-label={`Conhecer ${service.title}`}
@@ -530,7 +559,7 @@ export function ClosingCta({
           transition={{ type: "spring", stiffness: 70, damping: 16 }}
         >
           <Flex
-            align={{ base: "flex-start", md: "flex-end" }}
+            align={{ base: "center", md: "flex-end" }}
             direction={{ base: "column", md: "row" }}
             gap="8"
             justify="space-between"

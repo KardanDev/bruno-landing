@@ -58,6 +58,10 @@ const ServicesContent = ({ page }: Props) => {
           align={{ base: "flex-start", md: "flex-end" }}
           direction={{ base: "column", md: "row" }}
           gap="8"
+          alignItems={{
+            base: "center",
+            md: "flex-start",
+          }}
           justify={{
             base: "center",
             md: "flex-start",

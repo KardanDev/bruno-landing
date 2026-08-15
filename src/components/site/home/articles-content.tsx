@@ -20,12 +20,12 @@ const ArticlesContent = ({ page }: Props) => {
       backgroundImage={`url(${urlFor(page.articlesBanner)?.quality(100)?.url()})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
-      backgroundPosition="0% 0%"
+      backgroundPosition="40% 20%"
       backgroundAttachment={"fixed"}
     >
       <Container maxW="8xl" px={{ base: "5", md: "8" }}>
         <Flex
-          align={{ base: "flex-start", md: "flex-end" }}
+          align={{ base: "center", md: "flex-end" }}
           direction={{ base: "column", md: "row" }}
           gap="8"
           justify="space-between"
