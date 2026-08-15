@@ -15,6 +15,10 @@ const components: PortableTextComponents = {
         fontSize={{ base: "lg", md: "xl" }}
         lineHeight="1.85"
         mb="6"
+        textAlign={{
+          base: "center",
+          md: "start",
+        }}
       >
         {children}
       </Text>
@@ -29,6 +33,10 @@ const components: PortableTextComponents = {
         lineHeight="1.1"
         mb="5"
         mt="12"
+        textAlign={{
+          base: "center",
+          md: "start",
+        }}
       >
         {children}
       </Heading>
@@ -43,6 +51,10 @@ const components: PortableTextComponents = {
         lineHeight="1.2"
         mb="4"
         mt="10"
+        textAlign={{
+          base: "center",
+          md: "start",
+        }}
       >
         {children}
       </Heading>

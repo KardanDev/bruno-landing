@@ -103,11 +103,15 @@ function AboutContent({ page }: AboutContentProps) {
                 gap="4"
                 key={value._key}
                 pt="5"
+                textAlign={{
+                  base: "center",
+                  md: "start",
+                }}
               >
                 <Text color="ivory.100" fontFamily="heading" fontSize="3xl">
                   {value.title}
                 </Text>
-                <Text color="ink.700" lineHeight="1.75">
+                <Text color="ivory.200" lineHeight="1.75">
                   {value.description}
                 </Text>
               </Stack>
@@ -117,7 +121,13 @@ function AboutContent({ page }: AboutContentProps) {
         <Container maxW="8xl" px={{ base: "5", md: "8" }}>
           <SimpleGrid columns={{ base: 1, md: 3 }} gap="8">
             {page.stats.map((stat) => (
-              <Stack key={stat._key}>
+              <Stack
+                key={stat._key}
+                textAlign={{
+                  base: "center",
+                  md: "start",
+                }}
+              >
                 <Text
                   color="gold.300"
                   fontFamily="heading"

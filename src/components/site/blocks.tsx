@@ -197,6 +197,10 @@ export function PageHero({ hero }: { hero: PageHero }) {
                   fontWeight="400"
                   letterSpacing="-0.055em"
                   lineHeight="0.91"
+                  textAlign={{
+                    base: "center",
+                    md: "start",
+                  }}
                 >
                   {hero.title}
                 </Heading>
@@ -209,6 +213,10 @@ export function PageHero({ hero }: { hero: PageHero }) {
                     fontSize={{ base: "lg", md: "xl" }}
                     lineHeight="1.7"
                     maxW="xl"
+                    textAlign={{
+                      base: "center",
+                      md: "start",
+                    }}
                   >
                     {hero.description}
                   </Text>
