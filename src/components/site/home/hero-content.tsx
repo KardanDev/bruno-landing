@@ -67,16 +67,16 @@ const HeroContent = ({ page }: Props) => {
         direction="column"
         justify="end"
         minH="100vh"
-        px={{ base: 6, md: 12, xl: 20 }}
+        px={{ base: 3, md: 12, xl: 20 }}
         py={{ base: 24, lg: 44 }}
       >
         <Stack
-          gap="7"
+          gap="2"
           maxW={{
             lg: "2xl",
             xl: "3xl",
           }}
-          align="start"
+          align="center"
         >
           {page.hero.eyebrow && (
             <Reveal delay={0.04} y={16} scale={0.98}>
@@ -92,11 +92,14 @@ const HeroContent = ({ page }: Props) => {
               letterSpacing="-0.06em"
               lineHeight="1.078"
               fontSize={{
-                base: "5xl",
+                base: "3xl",
                 md: "5xl",
                 xl: "6xl",
               }}
-              textAlign="left"
+              textAlign={{
+                base: "center",
+                md: "left",
+              }}
             >
               {page.hero.title}
             </Heading>
@@ -108,7 +111,10 @@ const HeroContent = ({ page }: Props) => {
                 color="ivory.200"
                 fontSize={{ base: "lg", md: "xl" }}
                 maxW="xl"
-                textAlign="left"
+                textAlign={{
+                  base: "center",
+                  md: "left",
+                }}
               >
                 {page.hero.description}
               </Text>

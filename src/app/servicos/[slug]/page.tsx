@@ -16,6 +16,7 @@ import { RichText } from "@/components/site/rich-text";
 import { getService, getServicesPage, getSettings } from "@/sanity/lib/content";
 import { createMetadata } from "@/sanity/lib/metadata";
 import ServiceSlugContent from "@/components/site/services/service-slug-content";
+import { ViewTransition } from "react";
 
 export async function generateMetadata({
   params,
@@ -44,13 +45,13 @@ export default async function ServiceDetailPage({
   if (!service) notFound();
 
   return (
-    <>
+    <ViewTransition name="service-detail-page" key={slug}>
       <ServiceSlugContent
         settings={settings}
         service={service}
         servicesPage={servicesPage}
       />
       <ClosingCta hero={servicesPage.closingCta} />
-    </>
+    </ViewTransition>
   );
 }

@@ -8,6 +8,7 @@ import {
 } from "@/sanity/lib/content";
 import { createMetadata } from "@/sanity/lib/metadata";
 import ServicesContent from "@/components/site/services/services-content";
+import { ViewTransition } from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [page, settings] = await Promise.all([
@@ -24,10 +25,10 @@ export default async function ServicesPage() {
   ]);
 
   return (
-    <>
+    <ViewTransition name="services-page" key={"service"}>
       <PageHero hero={page.hero} />
       <ServicesContent page={page} services={services} />
       <ClosingCta hero={page.closingCta} />
-    </>
+    </ViewTransition>
   );
 }

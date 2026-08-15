@@ -33,7 +33,14 @@ export function CtaButton({ cta, tone = "dark" }: CtaButtonProps) {
 
   if (isExternal) {
     return (
-      <Button asChild borderRadius="full" fontWeight="600" px="6" {...styles}>
+      <Button
+        asChild
+        w={{ base: "full", md: "auto" }}
+        borderRadius="full"
+        fontWeight="600"
+        px="6"
+        {...styles}
+      >
         <a
           href={cta.href}
           rel={cta.href.startsWith("http") ? "noreferrer" : undefined}
@@ -46,7 +53,14 @@ export function CtaButton({ cta, tone = "dark" }: CtaButtonProps) {
   }
 
   return (
-    <Button asChild borderRadius="full" fontWeight="600" px="6" {...styles}>
+    <Button
+      asChild
+      w={{ base: "full", md: "auto" }}
+      borderRadius="full"
+      fontWeight="600"
+      px="6"
+      {...styles}
+    >
       <NextLink href={cta.href}>{label}</NextLink>
     </Button>
   );

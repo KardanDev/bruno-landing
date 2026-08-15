@@ -61,10 +61,14 @@ const IntroductionContent = ({ page }: Props) => {
             <AnimatedReveal>
               <Heading
                 fontFamily="heading"
-                fontSize={{ base: "4xl", md: "6xl" }}
+                fontSize={{ base: "3xl", md: "6xl" }}
                 fontWeight="400"
                 letterSpacing="-0.045em"
                 lineHeight="0.98"
+                textAlign={{
+                  base: "center",
+                  md: "left",
+                }}
               >
                 {page.introductionTitle}
               </Heading>
@@ -76,7 +80,14 @@ const IntroductionContent = ({ page }: Props) => {
               <Text
                 color="ivory.100"
                 fontSize={{ base: "lg", md: "xl" }}
-                lineHeight="1.85"
+                lineHeight={{
+                  base: "1.34",
+                  md: "1.85",
+                }}
+                textAlign={{
+                  base: "center",
+                  md: "left",
+                }}
               >
                 {page.introductionText}
               </Text>

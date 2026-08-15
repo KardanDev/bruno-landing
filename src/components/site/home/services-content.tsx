@@ -48,47 +48,6 @@ const ServicesContent = ({ page }: Props) => {
       backgroundPosition="80% 85%"
       backgroundAttachment={"fixed"}
     >
-      {/* Background image */}
-      {/*{selectedImage && (
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
-          animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
-          transition={{
-            duration: 1.2,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          style={{
-            position: "absolute",
-            inset: 0,
-            width: "100%",
-            height: "100%",
-            zIndex: 0,
-          }}
-        >
-          <CmsImage
-            image={selectedImage}
-            alt={selectedImage?.alt || ""}
-            mode="contain"
-
-            style={{
-              objectPosition: "center",
-            }}
-          />
-        </motion.div>
-      )}*/}
-
-      {/*{selectedImage && (
-        <Box
-          position="absolute"
-          inset={0}
-          zIndex={1}
-          bgGradient={{
-            base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 45%, blackAlpha.300 100%)",
-            lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.600 60%, blackAlpha.200 75%, transparent 100%)",
-          }}
-        />
-      )}*/}
-
       <Container
         position="relative"
         zIndex={2}
@@ -99,7 +58,10 @@ const ServicesContent = ({ page }: Props) => {
           align={{ base: "flex-start", md: "flex-end" }}
           direction={{ base: "column", md: "row" }}
           gap="8"
-          justify="space-between"
+          justify={{
+            base: "center",
+            md: "flex-start",
+          }}
           mb={{ base: "10", md: "14" }}
         >
           <SectionHeading

@@ -60,6 +60,10 @@ export function Eyebrow({
       fontWeight="700"
       letterSpacing="0.16em"
       textTransform="uppercase"
+      textAlign={{
+        base: "center",
+        md: "left",
+      }}
     >
       {children}
     </Text>
@@ -107,6 +111,10 @@ export function SectionHeading({
           fontWeight="400"
           letterSpacing="-0.04em"
           lineHeight="0.98"
+          textAlign={{
+            base: "center",
+            md: "left",
+          }}
         >
           {title}
         </Heading>
@@ -123,6 +131,10 @@ export function SectionHeading({
             color={inverse ? "ivory.200" : "ink.700"}
             fontSize={{ base: "lg", md: "xl" }}
             lineHeight="1.7"
+            textAlign={{
+              base: "center",
+              md: "left",
+            }}
           >
             {description}
           </Text>

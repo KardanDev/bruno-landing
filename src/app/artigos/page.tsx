@@ -3,6 +3,7 @@ import { PageHero } from "@/components/site/blocks";
 import { getBlogPage, getPosts, getSettings } from "@/sanity/lib/content";
 import { createMetadata } from "@/sanity/lib/metadata";
 import ArticlesContent from "@/components/site/articles/articles-content";
+import { ViewTransition } from "react";
 
 export async function generateMetadata(): Promise<Metadata> {
   const [page, settings] = await Promise.all([getBlogPage(), getSettings()]);
@@ -13,9 +14,9 @@ export default async function ArticlesPage() {
   const [page, posts] = await Promise.all([getBlogPage(), getPosts()]);
 
   return (
-    <>
+    <ViewTransition name="articles">
       <PageHero hero={page.hero} />
       <ArticlesContent page={page} articles={posts} />
-    </>
+    </ViewTransition>
   );
 }

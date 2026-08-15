@@ -4,6 +4,7 @@ import { PageHero } from "@/components/site/blocks";
 import { getPost, getSettings } from "@/sanity/lib/content";
 import { createMetadata } from "@/sanity/lib/metadata";
 import ArticleSlugContent from "@/components/site/articles/article-slug-content";
+import { ViewTransition } from "react";
 
 export async function generateMetadata({
   params,
@@ -26,7 +27,7 @@ export default async function ArticleDetailPage({
   if (!post) notFound();
 
   return (
-    <>
+    <ViewTransition name="article-slug" key={slug}>
       <PageHero
         hero={{
           description: post.excerpt,
@@ -35,6 +36,6 @@ export default async function ArticleDetailPage({
         }}
       />
       <ArticleSlugContent settings={settings} article={post} />
-    </>
+    </ViewTransition>
   );
 }
