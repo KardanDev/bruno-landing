@@ -211,51 +211,6 @@ export function PageHero({ hero }: { hero: PageHero }) {
               ) : null}
             </Stack>
           </MotionWrapper>
-
-          {hero.image ? (
-            <MotionWrapper
-              delay={0.1}
-              y={60}
-              scale={0.84}
-              rotate={7}
-              amount={0.18}
-            >
-              <motion.div
-                ref={heroParallax.ref}
-                style={{
-                  y: reduceMotion ? 0 : heroParallax.y,
-                  rotate: reduceMotion ? 0 : heroParallax.rotate,
-                  scale: reduceMotion ? 1 : heroParallax.scale,
-                }}
-              >
-                <Box
-                  borderRadius="editorial"
-                  h={{ base: "80", lg: "112" }}
-                  overflow="hidden"
-                  position="relative"
-                >
-                  <motion.div
-                    initial={
-                      reduceMotion ? false : { scale: 1.18, opacity: 0.8 }
-                    }
-                    whileInView={
-                      reduceMotion ? undefined : { scale: 1, opacity: 1 }
-                    }
-                    viewport={{ once: true, amount: 0.2 }}
-                    transition={{ type: "spring", stiffness: 60, damping: 14 }}
-                    whileHover={reduceMotion ? undefined : { scale: 1.07 }}
-                    style={{ width: "100%", height: "100%" }}
-                  >
-                    <CmsImage
-                      alt={hero.image.alt}
-                      fallbackLabel="MD"
-                      image={hero.image}
-                    />
-                  </motion.div>
-                </Box>
-              </motion.div>
-            </MotionWrapper>
-          ) : null}
         </SimpleGrid>
       </Container>
     </Box>
