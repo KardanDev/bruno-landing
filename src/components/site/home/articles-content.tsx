@@ -4,6 +4,7 @@ import React from "react";
 import { SectionHeading, ArticleCard } from "../blocks";
 import { CtaButton } from "../cta-button";
 import { HomePage } from "@/sanity/lib/types";
+import { urlFor } from "@/lib/imageUrl";
 
 type Props = {
   page: HomePage;
@@ -13,7 +14,15 @@ const ArticlesContent = ({ page }: Props) => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <Box as="section" py={{ base: "20", md: "28" }}>
+    <Box
+      as="section"
+      py={{ base: "20", md: "28" }}
+      backgroundImage={`url(${urlFor(page.articlesBanner)?.quality(100)?.url()})`}
+      backgroundSize="auto"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="0% 0%"
+      backgroundAttachment={"fixed"}
+    >
       <Container maxW="8xl" px={{ base: "5", md: "8" }}>
         <Flex
           align={{ base: "flex-start", md: "flex-end" }}

@@ -11,6 +11,7 @@ import React from "react";
 import { SectionHeading } from "../blocks";
 import { HomePage } from "@/sanity/lib/types";
 import { AnimatedReveal } from "../animated-reveal";
+import { urlFor } from "@/lib/imageUrl";
 
 type Props = {
   page: HomePage;
@@ -20,7 +21,15 @@ const ValuesContent = ({ page }: Props) => {
   const reduceMotion = useReducedMotion();
 
   return (
-    <Box as="section" py={{ base: "20", md: "28" }}>
+    <Box
+      as="section"
+      py={{ base: "20", md: "28" }}
+      backgroundImage={`url(${urlFor(page.valuesBanner)?.quality(100)?.url()})`}
+      backgroundSize="auto"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="0% 0%"
+      backgroundAttachment={"fixed"}
+    >
       <Container maxW="8xl" px={{ base: "5", md: "8" }}>
         <SectionHeading title={page.valuesTitle} inverse />
         <SimpleGrid

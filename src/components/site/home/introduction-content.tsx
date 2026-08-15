@@ -48,7 +48,7 @@ const IntroductionContent = ({ page }: Props) => {
         ?.url()})`}
       backgroundSize='fill'
       backgroundRepeat='no-repeat'
-      backgroundPosition='center'
+      backgroundPosition='40% 20%'
       backgroundAttachment={'fixed'}
     >
       {/*{selectedImage && (

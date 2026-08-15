@@ -44,9 +44,9 @@ const ServicesContent = ({ page }: Props) => {
       py={{ base: "20", md: "20" }}
       backgroundImage={`url(${urlFor(selectedImage)?.quality(100)
         ?.url()})`}
-      backgroundSize='fill'
+      backgroundSize='auto'
       backgroundRepeat='no-repeat'
-      backgroundPosition='center'
+      backgroundPosition='80% 85%'
       backgroundAttachment={'fixed'}
     >
       {/* Background image */}

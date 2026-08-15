@@ -6,6 +6,7 @@ import { SectionHeading } from "../blocks";
 import { CmsImage } from "../cms-image";
 import { CtaButton } from "../cta-button";
 import { FaqList } from "../faq-list";
+import { urlFor } from "@/lib/imageUrl";
 
 type Props = {
   page: HomePage;
@@ -21,9 +22,15 @@ const FaqContent = ({ page }: Props) => {
       overflow="hidden"
       bg="ivory.300"
       py={{ base: "20", md: "28" }}
+      backgroundImage={`url(${urlFor(page.faqBanner)?.quality(100)
+        ?.url()})`}
+      backgroundSize='fill'
+      backgroundRepeat='no-repeat'
+      backgroundPosition='center'
+      backgroundAttachment={'fixed'}
     >
       {/* Background image */}
-      {page.faqBanner && (
+      {/*{page.faqBanner && (
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, scale: 1.04 }}
           animate={reduceMotion ? undefined : { opacity: 1, scale: 1 }}
@@ -50,12 +57,12 @@ const FaqContent = ({ page }: Props) => {
             }}
           />
         </motion.div>
-      )}
+      )}*/}
 
       {/* Background overlay */}
-      {page.faqBanner && (
+      {/*{page.faqBanner && (
         <Box position="absolute" inset={0} zIndex={1} bg="blackAlpha.500" />
-      )}
+      )}*/}
 
       <Container
         position="relative"
@@ -73,6 +80,7 @@ const FaqContent = ({ page }: Props) => {
           <SectionHeading
             title={page.faqTitle}
             description={page.faqDescription}
+            inverse
           />
           {page.faqCta ? (
             <motion.div
@@ -101,7 +109,7 @@ const FaqContent = ({ page }: Props) => {
             damping: 16,
           }}
         >
-          <FaqList items={page.faqs} />
+          <FaqList items={page.faqs} inverse />
         </motion.div>
       </Container>
     </Box>

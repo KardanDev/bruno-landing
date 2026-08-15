@@ -36,7 +36,7 @@ const HeroContent = ({ page }: Props) => {
   }, [isMobile, page.hero.image, page.hero.imageMobile]);
 
   return (
-    <Box position="relative" minH="100vh" h="100%" overflow="hidden">
+    <Box position="relative" minH="100vh" h="100%" pt="30" overflow="hidden">
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, scale: 1, rotate: 0 }}
         animate={reduceMotion ? undefined : { opacity: 1, scale: 1, rotate: 0 }}

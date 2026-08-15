@@ -6,7 +6,7 @@ import Image from "next/image";
 import { urlFor } from "@/lib/imageUrl";
 
 type CmsImageProps = {
-  image?: SanityImage;
+  image: SanityImage;
   alt?: string;
   sizes?: string;
   height?: number;
@@ -28,69 +28,29 @@ export function CmsImage({
   style,
   fullWidth,
 }: CmsImageProps) {
-  if (image?.asset) {
-    return (
-      <Image
-        src={urlFor(image)
-          .width(width ?? 600)
-          .height(height ?? 450)
-          .quality(100)
-          .url()}
-        alt={alt ?? image.alt ?? fallbackLabel}
-        width={width ?? 600}
-        height={height ?? 450}
-        objectFit={mode ?? "cover"}
-        objectPosition="center"
-
-        style={{
-          ...style,
-          ...(fullWidth && {
-            height: "100%",
-            width: "100%",
-            objectFit: mode ?? 'cover',
-            objectPosition: "center",
-            aspectRatio: '3 / 4'
-          }),
-          ...(mode && { objectFit: mode }),
-        }}
-      />
-    );
-  }
+  const imageUrl = image?.asset
+    ? urlFor(image)!.quality(100).url()
+    : "/globe";
 
   return (
-    <Box
-      alignItems="center"
-      aria-label={alt ?? "Image placeholder"}
-      bg="wine.900"
-      color="ivory.50"
-      display="flex"
-      h={height}
-      justifyContent="center"
-      overflow="hidden"
-      position="relative"
-      role="img"
-      w="100%"
-      _after={{
-        borderColor: "gold.400",
-        borderRadius: "full",
-        borderWidth: "1px",
-        content: '""',
-        h: "72%",
-        opacity: 0.7,
-        position: "absolute",
-        transform: "rotate(-18deg)",
-        w: "72%",
+    <Image
+      src={imageUrl!}
+      alt={alt ?? image.alt ?? fallbackLabel}
+      width={width ?? 600}
+      height={height ?? 450}
+      objectFit={mode ?? "cover"}
+      objectPosition="center"
+
+      style={{
+        ...style,
+        ...(fullWidth && {
+          height: "100%",
+          width: "100%",
+          objectFit: mode ?? "cover",
+          objectPosition: "center",
+        }),
+        ...(mode && { objectFit: mode }),
       }}
-    >
-      <Text
-        fontFamily="heading"
-        fontSize={{ base: "6xl", md: "8xl" }}
-        fontStyle="italic"
-        letterSpacing="-0.08em"
-        zIndex="1"
-      >
-        {fallbackLabel}
-      </Text>
-    </Box>
+    />
   );
 }

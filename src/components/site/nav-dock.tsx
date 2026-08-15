@@ -264,16 +264,12 @@ function NavDock({ settings }: Props) {
             boxShadow="0 10px 35px rgba(0, 0, 0, 0.22)"
             pointerEvents="auto"
           >
-            {/* Mobile title */}
-            <Text
-              color="ivory.50"
-              fontFamily="heading"
-              fontSize="lg"
-              fontWeight="600"
-              whiteSpace="nowrap"
-            >
-              <CmsImage image={settings.siteLogo} height={120} width={120} />
-            </Text>
+            <CmsImage
+              image={settings.siteLogo!}
+              height={150}
+              width={150}
+              mode="contain"
+            />
 
             <IconButton
               aria-label={menuOpen ? "Fechar menu" : "Abrir menu"}
