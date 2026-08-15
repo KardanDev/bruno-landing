@@ -28,14 +28,12 @@ export function CmsImage({
   style,
   fullWidth,
 }: CmsImageProps) {
-  const imageUrl = image?.asset
-    ? urlFor(image)!.quality(100).url()
-    : "/globe";
+  const imageUrl = image?.asset ? urlFor(image)!.quality(100).url() : "/globe";
 
   return (
     <Image
       src={imageUrl!}
-      alt={alt ?? image.alt ?? fallbackLabel}
+      alt={alt ?? image.alt ?? "some alt"}
       width={width ?? 600}
       height={height ?? 450}
       objectFit={mode ?? "cover"}
