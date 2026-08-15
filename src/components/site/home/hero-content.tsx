@@ -42,9 +42,10 @@ const HeroContent = ({ page }: Props) => {
       minH="100vh"
       h="100%"
       pt="30"
+      maxW="full"
       overflow="hidden"
       backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
-      backgroundSize="fill"
+      backgroundSize="cover"
       backgroundRepeat="no-repeat"
       backgroundPosition="40% 20%"
       backgroundAttachment={"fixed"}

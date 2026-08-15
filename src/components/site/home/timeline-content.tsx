@@ -43,12 +43,11 @@ const TimelineContent = ({ page }: Props) => {
       bg="ink.950"
       color="ivory.50"
       py={{ base: "20", md: "28" }}
-      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)
-        ?.url()})`}
-      backgroundSize='fill'
-      backgroundRepeat='no-repeat'
-      backgroundPosition='center'
-      backgroundAttachment={'fixed'}
+      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="center"
+      backgroundAttachment={"fixed"}
     >
       {/*{selectedImage && (
         <motion.div

@@ -18,7 +18,7 @@ const ArticlesContent = ({ page }: Props) => {
       as="section"
       py={{ base: "20", md: "28" }}
       backgroundImage={`url(${urlFor(page.articlesBanner)?.quality(100)?.url()})`}
-      backgroundSize="auto"
+      backgroundSize="cover"
       backgroundRepeat="no-repeat"
       backgroundPosition="0% 0%"
       backgroundAttachment={"fixed"}

@@ -44,12 +44,11 @@ const IntroductionContent = ({ page }: Props) => {
       minH={{ base: "auto", lg: "70vh" }}
       display="flex"
       alignItems="center"
-      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)
-        ?.url()})`}
-      backgroundSize='fill'
-      backgroundRepeat='no-repeat'
-      backgroundPosition='40% 20%'
-      backgroundAttachment={'fixed'}
+      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="40% 20%"
+      backgroundAttachment={"fixed"}
     >
       {/*{selectedImage && (
         <motion.div

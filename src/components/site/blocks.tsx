@@ -585,12 +585,7 @@ export function ClosingCta({ hero }: { hero?: PageHero }) {
   if (!hero) return null;
 
   return (
-    <Box
-      as="section"
-      bg="ivory.300"
-      color="ink.900"
-      py={{ base: "16", md: "24" }}
-    >
+    <Box as="section" color="ink.900" py={{ base: "16", md: "24" }}>
       <Container maxW="8xl" px={{ base: "5", md: "8" }}>
         <motion.div
           initial={reduceMotion ? false : { opacity: 0, y: 48, scale: 0.96 }}

@@ -22,12 +22,11 @@ const FaqContent = ({ page }: Props) => {
       overflow="hidden"
       bg="ivory.300"
       py={{ base: "20", md: "28" }}
-      backgroundImage={`url(${urlFor(page.faqBanner)?.quality(100)
-        ?.url()})`}
-      backgroundSize='fill'
-      backgroundRepeat='no-repeat'
-      backgroundPosition='center'
-      backgroundAttachment={'fixed'}
+      backgroundImage={`url(${urlFor(page.faqBanner)?.quality(100)?.url()})`}
+      backgroundSize="cover"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="center"
+      backgroundAttachment={"fixed"}
     >
       {/* Background image */}
       {/*{page.faqBanner && (
