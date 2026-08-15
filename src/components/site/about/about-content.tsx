@@ -31,7 +31,10 @@ function AboutContent({ page }: AboutContentProps) {
         backgroundSize="cover"
         backgroundRepeat="no-repeat"
         backgroundPosition="40% 20%"
-        backgroundAttachment={"fixed"}
+        backgroundAttachment={{
+          base: "scroll",
+          md: "fixed",
+        }}
       >
         <Container maxW="8xl" px={{ base: "5", md: "8" }}>
           <SimpleGrid

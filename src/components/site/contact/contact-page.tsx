@@ -39,7 +39,11 @@ const ContactPage = ({ page, settings }: ContactPageProps) => {
       backgroundPosition="40% 20%"
       backgroundAttachment={"fixed"}
     >
-      <Container maxW="8xl" px={{ base: "5", md: "8" }}>
+      <Container
+        maxW="8xl"
+        px={{ base: "5", md: "8" }}
+        mt={{ base: "10", md: "12" }}
+      >
         <SimpleGrid
           alignItems="start"
           columns={{ base: 1, lg: 2 }}

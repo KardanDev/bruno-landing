@@ -33,7 +33,10 @@ function ArticleSlugContent({ settings, article }: ArticleSlugContentProps) {
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
       backgroundPosition="40% 20%"
-      backgroundAttachment={"fixed"}
+      backgroundAttachment={{
+        base: "scroll",
+        md: "fixed",
+      }}
       height={"100%"}
       width={"100%"}
     >

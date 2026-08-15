@@ -36,7 +36,10 @@ function ServiceSlugContent({ settings, service }: ServiceSlugContentProps) {
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
       backgroundPosition="40% 20%"
-      backgroundAttachment={"fixed"}
+      backgroundAttachment={{
+        base: "scroll",
+        md: "fixed",
+      }}
       height={"100%"}
       width={"100%"}
       py={{ base: "16", md: "24" }}
