@@ -104,7 +104,7 @@ const IntroductionContent = ({ page }: Props) => {
             >
               <CtaButton
                 cta={{
-                  href: "/about",
+                  href: "/sobre",
                   label: "Sobre nós",
                 }}
                 tone="outline"

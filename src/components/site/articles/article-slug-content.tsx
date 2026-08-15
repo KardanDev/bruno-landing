@@ -40,6 +40,7 @@ function ArticleSlugContent({ settings, article }: ArticleSlugContentProps) {
       height={"100%"}
       width={"100%"}
     >
+      {/*linear gradient for image=*/}
       <Container maxW="4xl" px={{ base: "5", md: "8" }}>
         <Text
           color="ivory.200"
