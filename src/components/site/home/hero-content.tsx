@@ -16,6 +16,7 @@ import { Eyebrow } from "../blocks";
 import { CtaButton } from "../cta-button";
 import { HomePage } from "@/sanity/lib/types";
 import { CmsImage } from "../cms-image";
+import { urlFor } from "@/lib/imageUrl";
 
 type Props = {
   page: HomePage;
@@ -36,35 +37,19 @@ const HeroContent = ({ page }: Props) => {
   }, [isMobile, page.hero.image, page.hero.imageMobile]);
 
   return (
-    <Box position="relative" minH="100vh" h="100%" pt="30" overflow="hidden">
-      <motion.div
-        initial={reduceMotion ? false : { opacity: 0, scale: 1, rotate: 0 }}
-        animate={reduceMotion ? undefined : { opacity: 1, scale: 1, rotate: 0 }}
-        transition={{
-          duration: 1.2,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-        style={{
-          position: "absolute",
-          inset: 0,
-          width: "100%",
-          height: "100%",
-          zIndex: 0,
-        }}
-      >
-        <CmsImage
-          alt={page.hero.image?.alt}
-          fallbackLabel="MD"
-          mode="cover"
-          width={3840}
-          height={2160}
-          fullWidth
-          image={selectedImage}
-        />
-        {/*0*/}
-      </motion.div>
-
-      <Box
+    <Box
+      position="relative"
+      minH="100vh"
+      h="100%"
+      pt="30"
+      overflow="hidden"
+      backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
+      backgroundSize="fill"
+      backgroundRepeat="no-repeat"
+      backgroundPosition="40% 20%"
+      backgroundAttachment={"fixed"}
+    >
+      {/*<Box
         position="absolute"
         inset={0}
         zIndex={1}
@@ -72,7 +57,7 @@ const HeroContent = ({ page }: Props) => {
           base: "linear(to-t, blackAlpha.900 0%, blackAlpha.700 35%, blackAlpha.200 75%, transparent 100%)",
           lg: "linear(to-r, blackAlpha.800 0%, blackAlpha.500 35%, blackAlpha.100 65%, transparent 100%)",
         }}
-      />
+      />*/}
 
       {/* Content */}
       <Flex

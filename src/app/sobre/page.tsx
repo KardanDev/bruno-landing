@@ -32,34 +32,38 @@ export default async function AboutPage() {
             <Stack gap="5">
               <Eyebrow>{page.storyEyebrow}</Eyebrow>
               <SectionHeading title={page.storyTitle} inverse />
-              <Box
-                display={{ base: "none", lg: "block" }}
-                borderRadius="editorial"
-                h="96"
-                mt="6"
-                overflow="hidden"
-              >
-                <CmsImage
-                  alt={page.portrait?.alt}
-                  fallbackLabel="MD"
-                  image={page.portrait}
-                />
-              </Box>
+              {page.portrait && (
+                <Box
+                  display={{ base: "none", lg: "block" }}
+                  borderRadius="editorial"
+                  h="96"
+                  mt="6"
+                  overflow="hidden"
+                >
+                  <CmsImage
+                    alt={page.portrait?.alt}
+                    fallbackLabel="MD"
+                    image={page.portrait}
+                  />
+                </Box>
+              )}
             </Stack>
             <Stack gap="8">
               <RichText value={page.story} />
-              <Box
-                display={{ base: "block", lg: "none" }}
-                borderRadius="editorial"
-                h="80"
-                overflow="hidden"
-              >
-                <CmsImage
-                  alt={page.portrait?.alt}
-                  fallbackLabel="MD"
-                  image={page.portrait}
-                />
-              </Box>
+              {page.portrait && (
+                <Box
+                  display={{ base: "block", lg: "none" }}
+                  borderRadius="editorial"
+                  h="80"
+                  overflow="hidden"
+                >
+                  <CmsImage
+                    alt={page.portrait?.alt}
+                    fallbackLabel="MD"
+                    image={page.portrait}
+                  />
+                </Box>
+              )}
             </Stack>
           </SimpleGrid>
         </Container>
