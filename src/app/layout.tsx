@@ -7,6 +7,7 @@ import { createMetadata } from "@/sanity/lib/metadata";
 
 import NavDock from "@/components/site/nav-dock";
 import Script from "next/script";
+import { Analytics } from "@vercel/analytics/react";
 
 export async function generateMetadata(): Promise<Metadata> {
   return createMetadata(undefined, await getSettings());
@@ -22,6 +23,7 @@ export default async function RootLayout({
   return (
     <html lang="pt-BR">
       <body>
+        <Analytics />
         <noscript>
           <iframe
             src="https://www.googletagmanager.com/ns.html?id=GTM-PGCRJ4QC"
