@@ -161,11 +161,17 @@ export function PageHero({ hero }: { hero: PageHero }) {
       overflow="hidden"
       position="relative"
       py={{ base: "16", md: "36" }}
+      pt={{
+        base: "44",
+      }}
       backgroundImage={`url(${urlFor(selectedImage)?.quality(100)?.url()})`}
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
       backgroundPosition="40% 20%"
-      backgroundAttachment={"fixed"}
+      backgroundAttachment={{
+        base: "scroll",
+        md: "fixed",
+      }}
     >
       <Container
         maxW="8xl"

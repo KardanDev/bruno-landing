@@ -26,7 +26,7 @@ function ArticlesContent({ page, articles }: ArticlesContentProps) {
       backgroundRepeat="no-repeat"
       backgroundPosition="40% 20%"
       backgroundAttachment={{
-        base: "scroll",
+        base: "fixed",
         md: "fixed",
       }}
     >

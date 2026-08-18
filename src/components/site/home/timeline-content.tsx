@@ -50,17 +50,17 @@ const TimelineContent = ({ page }: Props) => {
       backgroundSize="cover"
       backgroundRepeat="no-repeat"
       backgroundPosition="center bottom"
-      backgroundAttachment={{ base: "scroll", md: "fixed" }}
+      backgroundAttachment={{ base: "fixed", md: "fixed" }}
     >
       {/* Background overlay */}
-      <Box
+      {/*<Box
         position="absolute"
         inset={0}
         bgGradient={{
           base: "linear(to-b, blackAlpha.900 0%, blackAlpha.800 45%, blackAlpha.950 100%)",
           lg: "linear(to-r, blackAlpha.850 0%, blackAlpha.700 50%, blackAlpha.850 100%)",
         }}
-      />
+      />*/}
 
       <Container
         position="relative"

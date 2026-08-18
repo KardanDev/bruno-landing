@@ -32,7 +32,7 @@ function AboutContent({ page }: AboutContentProps) {
         backgroundRepeat="no-repeat"
         backgroundPosition="40% 20%"
         backgroundAttachment={{
-          base: "scroll",
+          base: "fixed",
           md: "fixed",
         }}
       >
